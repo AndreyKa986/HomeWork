@@ -1,9 +1,9 @@
 package lesson4;
 
 public class Patient {
-    //public String fistName;
-    //public String secondName;
-    //public String middleName;
+    public String fistName;
+    public String secondName;
+    public String middleName;
     public String fsm;
     public int age;
     public String diagnosis = " - ";
