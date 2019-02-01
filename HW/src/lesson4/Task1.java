@@ -23,12 +23,9 @@ public class Task1 {
     }
 
     public static void dataInput(Scanner scanner, Patient patient) {
-        System.out.println("Имя:");
-        patient.fistName = scanner.next();
-        System.out.println("Фамилию:");
-        patient.secondName = scanner.next();
-        System.out.println("Отчество:");
-        patient.middleName = scanner.next();
+        System.out.println("ФИО:");
+        scanner.nextLine();
+        patient.fsm = scanner.nextLine();
         System.out.println("Возраст:");
         patient.age = scanner.nextInt();
         System.out.println("Евляется ли граждининном РБ (да/нет):");
@@ -37,34 +34,24 @@ public class Task1 {
     }
 
     public static void dataOutput(Patient patient) {
-        System.out.println("Пациент \"" + patient.secondName + " " + patient.fistName + " " +
-                patient.middleName + "\" - Возраст = \"" + patient.age + "\"");
+        System.out.println("Пациент \"" + patient.fsm + "\" - Возраст = \"" + patient.age + "\"");
     }
 
     public static void searchName(Patient[] patient, Scanner scanner) {
-        System.out.println("Введите начало искомой фамилии, имени или отчества:");
-        String temp = scanner.next();
+        System.out.println("Введите часть ФИО:");
+        scanner.nextLine();
+        String temp = scanner.nextLine();
         int j = 0;
         System.out.println("Результаты поиска:");
         for (int i = 0; i < patient.length; i++) {
-            if (patient[i].fistName.toLowerCase().startsWith(temp.toLowerCase())) {
-                dataOutput(patient[i]);
-                j++;
-                continue;
-            }
-            if (patient[i].secondName.toLowerCase().startsWith(temp.toLowerCase())) {
-                dataOutput(patient[i]);
-                j++;
-                continue;
-            }
-            if (patient[i].middleName.toLowerCase().startsWith(temp.toLowerCase())) {
+            if (patient[i].fsm.toLowerCase().contains(temp.toLowerCase())) {
                 dataOutput(patient[i]);
                 j++;
             }
         }
         if (j == 0)
             System.out.println("Пациентов с такой частью имени не найдено.");
-        newChance(scanner,patient);
+        newChance(scanner, patient);
     }
 
     public static void searchAge(Patient[] patient, Scanner scanner) {
@@ -80,7 +67,7 @@ public class Task1 {
         }
         if (j == 0)
             System.out.println("Пациентов с таким возрастом не найдено.");
-        newChance(scanner,patient);
+        newChance(scanner, patient);
     }
 
     public static void choice(Scanner scanner, Patient[] list) {
@@ -113,4 +100,3 @@ public class Task1 {
         }
     }
 }
-
