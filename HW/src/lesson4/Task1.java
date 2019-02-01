@@ -94,6 +94,7 @@ public class Task1 {
                 searchAge(list, scanner);
                 break;
             case 0:
+                scanner.close();
                 System.exit(0);
             default:
                 System.out.println("Введено не правильное значение.");
