@@ -7,5 +7,6 @@ public class Main {
         ATMofBelGazPromBank one=new ATMofBelGazPromBank(100,100,100);
         Scanner scanner=new Scanner(System.in);
         one.terminal(scanner);
+        scanner.close();
     }
 }
