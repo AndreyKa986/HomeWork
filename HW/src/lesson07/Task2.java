@@ -17,6 +17,7 @@ public class Task2 {
         System.out.println("\n\nВведите текст)");
         Scanner scanner=new Scanner(System.in);
         writer.write(scanner.nextLine());
+        scanner.close();
         writer.flush();
         writer.close();
     }
