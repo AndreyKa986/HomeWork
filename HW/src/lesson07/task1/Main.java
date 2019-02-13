@@ -43,15 +43,25 @@ public class Main {
     }
 
     public static void printMiddleAge(Date mid) {
-        Calendar middleAge=new GregorianCalendar();
+        Calendar middleAge = new GregorianCalendar();
         middleAge.setTime(mid);
         Calendar today = Calendar.getInstance();
-        today.add(MINUTE,-middleAge.get(MINUTE));
-        today.add(HOUR,-middleAge.get(HOUR));
-        today.add(DAY_OF_MONTH,-middleAge.get(DAY_OF_MONTH));
-        today.add(MONTH,-middleAge.get(MONTH));
-        today.add(YEAR,-middleAge.get(YEAR));
-        SimpleDateFormat formatForToday=new SimpleDateFormat("y 'лет' "+today.get(MONTH)+" 'мес.' d 'дн.'");
-        System.out.println(formatForToday.format(today.getTime()));
+        int day = 0;
+        if (today.get(DAY_OF_MONTH) >= middleAge.get(DAY_OF_MONTH))
+            day = today.get(DAY_OF_MONTH) - middleAge.get(DAY_OF_MONTH);
+        else {
+            today.add(DAY_OF_MONTH, -middleAge.get(DAY_OF_MONTH));
+            day = today.get(DAY_OF_MONTH);
+        }
+        int month=0;
+        if(today.get(MONTH)>=middleAge.get(MONTH))
+            month=today.get(MONTH)-middleAge.get(MONTH);
+        else{
+            today.add(MONTH, -middleAge.get(MONTH));
+            month=today.get(MONTH);
+        }
+        int year=today.get(YEAR)-middleAge.get(YEAR);
+        System.out.println("Средний возраст:");
+        System.out.println(year+" лет "+month+" мес. "+day+" дн.");
     }
 }
