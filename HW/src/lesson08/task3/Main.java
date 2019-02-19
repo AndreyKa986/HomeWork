@@ -30,6 +30,7 @@ public class Main {
                     key=0;
             }
         }
+        scanner.close();
     }
 
     public static void read() throws IOException, ParseException {
