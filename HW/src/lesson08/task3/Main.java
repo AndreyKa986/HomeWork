@@ -33,8 +33,7 @@ public class Main {
     }
 
     public static void read() throws IOException, ParseException {
-        try {
-            FileReader reader = new FileReader("Students.txt");
+        try (FileReader reader = new FileReader("Students.txt")){
             String temp = "";
             int i;
             while ((i = reader.read()) != -1) {
