@@ -10,31 +10,21 @@ public class Task2 {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Введите путь папки для сканированиая:");
-        String pathOfFolder = scanner.nextLine();
-        scanner.close();
         FileScanner fileScanner = new FileScanner();
-        fileScanner.scanDirectory(new File(pathOfFolder));
+        fileScanner.scanDirectory(new File(scanner.nextLine()));
+        scanner.close();
+        ArrayList<LocalMp3File>mp3Files=fileScanner.getMp3Files();
         if (!fileScanner.getAllFiles().isEmpty()) {
-            if (!fileScanner.getMp3Files().isEmpty() && checkAndDeleteNullInMp3Files(fileScanner.getMp3Files())) {
-                Collections.sort(fileScanner.getMp3Files());
-                printMP3Collection(fileScanner.getMp3Files());
-                printSameSong(fileScanner.getMp3Files());
+            if (!fileScanner.getMp3Files().isEmpty()) {
+                Collections.sort(mp3Files);
+                printMP3Collection(mp3Files);
+                printSameSong(mp3Files);
             } else {
                 System.out.println("Отсутствуют mp3 файлы");
             }
             printEqualsFile(fileScanner.getAllFiles());
         } else
             System.out.println("В директории отсутсвуют файлы");
-    }
-
-    private static boolean checkAndDeleteNullInMp3Files(ArrayList<LocalMp3File> mp3Files) {
-        for (int i = 0; i < mp3Files.size(); i++) {
-            if (mp3Files.get(i) == null) {
-                mp3Files.remove(i);
-                i--;
-            }
-        }
-        return !mp3Files.isEmpty();
     }
 
     private static void printMP3Collection(ArrayList<LocalMp3File> mp3Files) {

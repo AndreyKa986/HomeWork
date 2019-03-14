@@ -42,7 +42,9 @@ class FileScanner {
         String checkSum = getCheckSum(pathname);
         if (pathname.endsWith(".mp3")) {
             LocalMp3File localMp3File = createMp3File(pathname, checkSum);
-            mp3Files.add(localMp3File);
+            if (localMp3File != null) {
+                mp3Files.add(localMp3File);
+            }
         }
         LocalFile localFile = new LocalFile(pathname, checkSum);
         allFiles.add(localFile);
@@ -74,7 +76,7 @@ class FileScanner {
         } catch (IOException | UnsupportedTagException | InvalidDataException | IllegalArgumentException e) {
             System.out.println("\nВнимание!!!");
             System.out.println("Обноружен файл который не является mp3 файлом :");
-            System.out.println(pathname+"\n\n");
+            System.out.println(pathname + "\n\n");
         }
         return null;
     }
