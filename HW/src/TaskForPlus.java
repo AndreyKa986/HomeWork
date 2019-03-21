@@ -40,7 +40,7 @@ public class TaskForPlus {
 //        arrayList.trimToSize();
     }
 
-    public static void deleteFromLinkedList(LinkedList linkedList) {
+    private static void deleteFromLinkedList(LinkedList linkedList) {
         Iterator iterator = linkedList.iterator();
         while (iterator.hasNext()) {
             iterator.next();
