@@ -1,0 +1,679 @@
+[
+  {
+    "id": "shop0001",
+    "name": "Sony",
+    "address": "Pobediteley 9",
+    "typeOfStore": "tech",
+    "listOfProduct": [
+      {
+        "id": "prdt0001",
+        "name": "PlayStation 4 Pro",
+        "barcode": "0711719937364",
+        "price": 970.0,
+        "rating": 4.5,
+        "category": "console",
+        "quantityInStock": 9.0,
+        "expirationDate": "Mar 24, 2022"
+      },
+      {
+        "id": "prdt0002",
+        "name": "WH-1000XM3",
+        "barcode": "0027242911574",
+        "price": 790.0,
+        "rating": 4.5,
+        "category": "headphones",
+        "quantityInStock": 4.0,
+        "expirationDate": "Oct 2, 2021"
+      },
+      {
+        "id": "prdt0003",
+        "name": "Xperia XZ3",
+        "barcode": "0095673866664",
+        "price": 1720.0,
+        "rating": 4.5,
+        "category": "mobile",
+        "quantityInStock": 14.0,
+        "expirationDate": "Feb 17, 2022"
+      },
+      {
+        "id": "prdt0004",
+        "name": "a7 III",
+        "barcode": "0027242909854",
+        "price": 4410.0,
+        "rating": 5.0,
+        "category": "photo",
+        "quantityInStock": 7.0,
+        "expirationDate": "Oct 13, 2022"
+      },
+      {
+        "id": "prdt0005",
+        "name": "KD-55AF8",
+        "barcode": "0027242909908",
+        "price": 4320.0,
+        "rating": 5.0,
+        "category": "tv",
+        "quantityInStock": 21.0,
+        "expirationDate": "Aug 12, 2024"
+      }
+    ],
+    "listOfPromotionalProduct": [
+      {
+        "validityPeriod": "Apr 30, 2019",
+        "id": "sale0001",
+        "name": "PlayStation 4 Slim",
+        "barcode": "0754292173095",
+        "price": 670.0,
+        "rating": 4.5,
+        "category": "console",
+        "quantityInStock": 9.0,
+        "expirationDate": "Mar 24, 2021"
+      },
+      {
+        "validityPeriod": "Apr 18, 2019",
+        "id": "sale0002",
+        "name": "Xperia XZ1",
+        "barcode": "0800265792050",
+        "price": 700.0,
+        "rating": 4.5,
+        "category": "mobile",
+        "quantityInStock": 22.0,
+        "expirationDate": "Dec 10, 2021"
+      },
+      {
+        "validityPeriod": "Apr 18, 2019",
+        "id": "sale0003",
+        "name": "WH-CH500",
+        "barcode": "0027242908819",
+        "price": 84.0,
+        "rating": 3.5,
+        "category": "headphones",
+        "quantityInStock": 23.0,
+        "expirationDate": "Apr 8, 2021"
+      },
+      {
+        "validityPeriod": "Apr 18, 2019",
+        "id": "sale0004",
+        "name": "a7 II",
+        "barcode": "0027242893832",
+        "price": 2590.0,
+        "rating": 4.5,
+        "category": "photo",
+        "quantityInStock": 12.0,
+        "expirationDate": "Jun 25, 2021"
+      },
+      {
+        "validityPeriod": "May 18, 2019",
+        "id": "sale0005",
+        "name": "KD-43XE7005",
+        "barcode": "0027242903715",
+        "price": 1520.0,
+        "rating": 4.0,
+        "category": "tv",
+        "quantityInStock": 6.0,
+        "expirationDate": "Oct 15, 2021"
+      }
+    ],
+    "listOfFreeProduct": [
+      {
+        "quantityInOneHand": 1.0,
+        "id": "free0001",
+        "name": "PlayStation Classic",
+        "barcode": "0711719526063",
+        "price": 0.0,
+        "rating": 3.0,
+        "category": "console",
+        "quantityInStock": 13.0,
+        "expirationDate": "Sep 9, 2020"
+      },
+      {
+        "quantityInOneHand": 1.0,
+        "id": "free0002",
+        "name": "MDR-EX155AP",
+        "barcode": "0027242906891",
+        "price": 0.0,
+        "rating": 4.5,
+        "category": "headphones",
+        "quantityInStock": 20.0,
+        "expirationDate": "Jun 3, 2019"
+      },
+      {
+        "quantityInOneHand": 1.0,
+        "id": "free0003",
+        "name": "SRS-XB31",
+        "barcode": "0887401056214",
+        "price": 0.0,
+        "rating": 5.0,
+        "category": "wspeaker",
+        "quantityInStock": 19.0,
+        "expirationDate": "Sep 25, 2021"
+      },
+      {
+        "quantityInOneHand": 1.0,
+        "id": "free0004",
+        "name": "HT-CT80",
+        "barcode": "0027242886063",
+        "price": 0.0,
+        "rating": 4.5,
+        "category": "soundbar",
+        "quantityInStock": 2.0,
+        "expirationDate": "Dec 6, 2021"
+      },
+      {
+        "quantityInOneHand": 1.0,
+        "id": "free0005",
+        "name": "HDR-AS50",
+        "barcode": "0027242895744",
+        "price": 0.0,
+        "rating": 4.5,
+        "category": "actioncamera",
+        "quantityInStock": 12.0,
+        "expirationDate": "Jul 25, 2019"
+      }
+    ]
+  },
+  {
+    "id": "shop0002",
+    "name": "Samsung",
+    "address": "Nemiga 5",
+    "typeOfStore": "tech",
+    "listOfProduct": [
+      {
+        "id": "prdt0001",
+        "name": "Galaxy S10+",
+        "barcode": "0603784293912",
+        "price": 2350.0,
+        "rating": 5.0,
+        "category": "mobile",
+        "quantityInStock": 25.0,
+        "expirationDate": "Feb 23, 2022"
+      },
+      {
+        "id": "prdt0002",
+        "name": "Galaxy Watch 46mm",
+        "barcode": "0887276279572",
+        "price": 625.0,
+        "rating": 4.5,
+        "category": "smartwatch",
+        "quantityInStock": 27.0,
+        "expirationDate": "May 31, 2021"
+      },
+      {
+        "id": "prdt0003",
+        "name": "UE50NU7400U",
+        "barcode": "8801643182311",
+        "price": 1390.0,
+        "rating": 4.5,
+        "category": "tv",
+        "quantityInStock": 20.0,
+        "expirationDate": "Apr 13, 2024"
+      },
+      {
+        "id": "prdt0004",
+        "name": "C27FG73FQI",
+        "barcode": "0887276202075",
+        "price": 720.0,
+        "rating": 4.5,
+        "category": "display",
+        "quantityInStock": 18.0,
+        "expirationDate": "Jan 10, 2022"
+      },
+      {
+        "id": "prdt0005",
+        "name": "Galaxy Note9",
+        "barcode": "0887276270722",
+        "price": 1750.0,
+        "rating": 5.0,
+        "category": "mobile",
+        "quantityInStock": 28.0,
+        "expirationDate": "Feb 17, 2021"
+      }
+    ],
+    "listOfPromotionalProduct": [
+      {
+        "validityPeriod": "Apr 30, 2019",
+        "id": "sale0001",
+        "name": "Galaxy S8",
+        "barcode": "0887276218830",
+        "price": 1000.0,
+        "rating": 4.0,
+        "category": "mobile",
+        "quantityInStock": 26.0,
+        "expirationDate": "May 6, 2020"
+      },
+      {
+        "validityPeriod": "Apr 18, 2019",
+        "id": "sale0002",
+        "name": "Gear IconX",
+        "barcode": "0603784367590",
+        "price": 320.0,
+        "rating": 4.0,
+        "category": "headphones",
+        "quantityInStock": 14.0,
+        "expirationDate": "Apr 2, 2021"
+      },
+      {
+        "validityPeriod": "May 31, 2019",
+        "id": "sale0003",
+        "name": "Galaxy Tab A",
+        "barcode": "0887276237732",
+        "price": 600.0,
+        "rating": 5.0,
+        "category": "tabletpc",
+        "quantityInStock": 12.0,
+        "expirationDate": "Feb 4, 2021"
+      },
+      {
+        "validityPeriod": "May 10, 2019",
+        "id": "sale0004",
+        "name": "UE32N5300AU",
+        "barcode": "0887276674179",
+        "price": 635.0,
+        "rating": 4.5,
+        "category": "tv",
+        "quantityInStock": 20.0,
+        "expirationDate": "Apr 2, 2023"
+      },
+      {
+        "validityPeriod": "May 11, 2019",
+        "id": "sale0005",
+        "name": "Galaxy Watch 42mm",
+        "barcode": "0887276279596",
+        "price": 580.0,
+        "rating": 4.5,
+        "category": "smartwatch",
+        "quantityInStock": 26.0,
+        "expirationDate": "Dec 27, 2020"
+      }
+    ],
+    "listOfFreeProduct": [
+      {
+        "quantityInOneHand": 1.0,
+        "id": "free0001",
+        "name": "Galaxy Buds",
+        "barcode": "0887276303987",
+        "price": 0.0,
+        "rating": 5.0,
+        "category": "headphones",
+        "quantityInStock": 1.0,
+        "expirationDate": "Mar 24, 2021"
+      },
+      {
+        "quantityInOneHand": 1.0,
+        "id": "free0002",
+        "name": "850 Evo 250GB",
+        "barcode": "0887276232317",
+        "price": 0.0,
+        "rating": 4.5,
+        "category": "ssd",
+        "quantityInStock": 1.0,
+        "expirationDate": "Sep 25, 2019"
+      },
+      {
+        "quantityInOneHand": 1.0,
+        "id": "free0003",
+        "name": "Galaxy J7",
+        "barcode": "0887276280059",
+        "price": 0.0,
+        "rating": 4.0,
+        "category": "mobile",
+        "quantityInStock": 13.0,
+        "expirationDate": "Dec 10, 2019"
+      },
+      {
+        "quantityInOneHand": 1.0,
+        "id": "free0004",
+        "name": "EVO Plus microSDHC 32GB",
+        "barcode": "0724696676607",
+        "price": 0.0,
+        "rating": 4.0,
+        "category": "memcards",
+        "quantityInStock": 14.0,
+        "expirationDate": "jan 1, 2019"
+      },
+      {
+        "quantityInOneHand": 1.0,
+        "id": "free0005",
+        "name": "970 Evo 250GB",
+        "barcode": "0887276263311",
+        "price": 0.0,
+        "rating": 4.5,
+        "category": "ssd",
+        "quantityInStock": 18.0,
+        "expirationDate": "Jul 17, 2020"
+      }
+    ]
+  },
+  {
+    "id": "shop0003",
+    "name": "LG",
+    "address": "Kakhovskaya 70a",
+    "typeOfStore": "tech",
+    "listOfProduct": [
+      {
+        "id": "prdt0001",
+        "name": "49UK6450",
+        "barcode": "0719192621275",
+        "price": 1145.0,
+        "rating": 4.5,
+        "category": "tv",
+        "quantityInStock": 19.0,
+        "expirationDate": "Jul 11, 2023"
+      },
+      {
+        "id": "prdt0002",
+        "name": "29UM69G-B",
+        "barcode": "0719192609150",
+        "price": 505.0,
+        "rating": 4.5,
+        "category": "display",
+        "quantityInStock": 20.0,
+        "expirationDate": "Jun 20, 2021"
+      },
+      {
+        "id": "prdt0003",
+        "name": "F2J5HS3W",
+        "barcode": "0048231017039",
+        "price": 830.0,
+        "rating": 5.0,
+        "category": "washingmachine",
+        "quantityInStock": 1.0,
+        "expirationDate": "Sep 22, 2020"
+      },
+      {
+        "id": "prdt0004",
+        "name": "GA-B499YMQZ",
+        "barcode": "0719192220478",
+        "price": 1435.0,
+        "rating": 4.0,
+        "category": "refrigerator",
+        "quantityInStock": 18.0,
+        "expirationDate": "Oct 14, 2020"
+      },
+      {
+        "id": "prdt0005",
+        "name": "V30+",
+        "barcode": "0034722679565",
+        "price": 1045.0,
+        "rating": 4.5,
+        "category": "mobile",
+        "quantityInStock": 17.0,
+        "expirationDate": "Sep 10, 2021"
+      }
+    ],
+    "listOfPromotionalProduct": [
+      {
+        "validityPeriod": "Apr 26, 2019",
+        "id": "sale0001",
+        "name": "24MP59G-P",
+        "barcode": "8806087296877",
+        "price": 300.0,
+        "rating": 4.0,
+        "category": "display",
+        "quantityInStock": 21.0,
+        "expirationDate": "Feb 2, 2020"
+      },
+      {
+        "validityPeriod": "Apr 22, 2019",
+        "id": "sale0002",
+        "name": "43UK6450",
+        "barcode": "0719192621299",
+        "price": 940.0,
+        "rating": 4.5,
+        "category": "tv",
+        "quantityInStock": 20.0,
+        "expirationDate": "Jan 1, 2023"
+      },
+      {
+        "validityPeriod": "May 12, 2019",
+        "id": "sale0003",
+        "name": "GA-B429SMQZ ",
+        "barcode": "0719192231375",
+        "price": 1120.0,
+        "rating": 4.0,
+        "category": "refrigerator",
+        "quantityInStock": 17.0,
+        "expirationDate": "Jun 11, 2021"
+      },
+      {
+        "validityPeriod": "May 12, 2019",
+        "id": "sale0004",
+        "name": "F1096ND3",
+        "barcode": "0048231017121",
+        "price": 760.0,
+        "rating": 4.0,
+        "category": "washingmachine",
+        "quantityInStock": 22.0,
+        "expirationDate": "Sep 25, 2020"
+      }
+    ],
+    "listOfFreeProduct": [
+      {
+        "quantityInOneHand": 1.0,
+        "id": "free0001",
+        "name": "SJ3",
+        "barcode": "0719192604933",
+        "price": 0.0,
+        "rating": 4.0,
+        "category": "soundbar",
+        "quantityInStock": 12.0,
+        "expirationDate": "Dec 12, 2021"
+      },
+      {
+        "quantityInOneHand": 1.0,
+        "id": "free0002",
+        "name": "MW23R35GIB",
+        "barcode": "0048231318983",
+        "price": 0.0,
+        "rating": 4.5,
+        "category": "microvawe",
+        "quantityInStock": 13.0,
+        "expirationDate": "Aug 28, 2020"
+      }
+    ]
+  },
+  {
+    "id": "shop0004",
+    "name": "Huawei",
+    "address": "Dzerzhinskogo 5",
+    "typeOfStore": "tech",
+    "listOfProduct": [
+      {
+        "id": "prdt0001",
+        "name": "P20 Pro",
+        "barcode": "0886598052603",
+        "price": 1370.0,
+        "rating": 4.5,
+        "category": "mobile",
+        "quantityInStock": 18.0,
+        "expirationDate": "Oct 13, 2021"
+      },
+      {
+        "id": "prdt0002",
+        "name": "Mate 20 Pro",
+        "barcode": "0886598052573",
+        "price": 1945.0,
+        "rating": 4.5,
+        "category": "mobile",
+        "quantityInStock": 21.0,
+        "expirationDate": "Sep 19, 2021"
+      },
+      {
+        "id": "prdt0003",
+        "name": "MateBook X Pro",
+        "barcode": "0721352438135",
+        "price": 3560.0,
+        "rating": 5.0,
+        "category": "notebook",
+        "quantityInStock": 5.0,
+        "expirationDate": "Sep 5, 2021"
+      }
+    ],
+    "listOfPromotionalProduct": [
+      {
+        "validityPeriod": "May 2, 2019",
+        "id": "sale0001",
+        "name": "MediaPad M5 lite",
+        "barcode": "0886598060622",
+        "price": 610.0,
+        "rating": 5.0,
+        "category": "tabletpc",
+        "quantityInStock": 9.0,
+        "expirationDate": "Aug 29, 2020"
+      },
+      {
+        "validityPeriod": "May 1, 2019",
+        "id": "sale0002",
+        "name": "Watch GT",
+        "barcode": "0098841689218",
+        "price": 405.0,
+        "rating": 5.0,
+        "category": "smartwatch",
+        "quantityInStock": 13.0,
+        "expirationDate": "May 9, 2020"
+      }
+    ],
+    "listOfFreeProduct": [
+      {
+        "quantityInOneHand": 1.0,
+        "id": "free0001",
+        "name": "Y5 Lite",
+        "barcode": "6901443234172",
+        "price": 0.0,
+        "rating": 4.0,
+        "category": "mobile",
+        "quantityInStock": 15.0,
+        "expirationDate": "Sep 9, 2021"
+      },
+      {
+        "quantityInOneHand": 1.0,
+        "id": "free0002",
+        "name": "FreeBuds",
+        "barcode": "6901443234035",
+        "price": 0.0,
+        "rating": 3.0,
+        "category": "headphone",
+        "quantityInStock": 17.0,
+        "expirationDate": "May 25, 2020"
+      },
+      {
+        "quantityInOneHand": 1.0,
+        "id": "free0003",
+        "name": "MediaPad T3 10",
+        "barcode": "0886598049931",
+        "price": 0.0,
+        "rating": 4.5,
+        "category": "tabletpc",
+        "quantityInStock": 15.0,
+        "expirationDate": "Jun 5, 2020"
+      },
+      {
+        "quantityInOneHand": 1.0,
+        "id": "free0004",
+        "name": "Band 3 Pro",
+        "barcode": "0886598059800",
+        "price": 0.0,
+        "rating": 5.0,
+        "category": "smartwatch",
+        "quantityInStock": 4.0,
+        "expirationDate": "Sep 15, 2020"
+      }
+    ]
+  },
+  {
+    "id": "shop0005",
+    "name": "Xiaomi",
+    "address": "Bobruyskaya 6",
+    "typeOfStore": "tech",
+    "listOfProduct": [
+      {
+        "id": "prdt0001",
+        "name": "Mi Robot",
+        "barcode": "0713830336644",
+        "price": 665.0,
+        "rating": 4.5,
+        "category": "robotcleaner",
+        "quantityInStock": 27.0,
+        "expirationDate": "May 4, 2020"
+      },
+      {
+        "id": "prdt0002",
+        "name": "MI TV 4A Pro 43",
+        "barcode": "0657419714716",
+        "price": 74.0,
+        "rating": 4.5,
+        "category": "tv",
+        "quantityInStock": 19.0,
+        "expirationDate": "Dec 11, 2021"
+      },
+      {
+        "id": "prdt0003",
+        "name": "Mi Notebook Pro 15.6",
+        "barcode": "0737798702181",
+        "price": 2150.0,
+        "rating": 4.5,
+        "category": "notebook",
+        "quantityInStock": 20.0,
+        "expirationDate": "Apr 21, 2021"
+      }
+    ],
+    "listOfPromotionalProduct": [
+      {
+        "validityPeriod": "May 8, 2019",
+        "id": "sale0001",
+        "name": "Mi 8 Lite",
+        "barcode": "0696595807171",
+        "price": 530.0,
+        "rating": 4.5,
+        "category": "mobile",
+        "quantityInStock": 34.0,
+        "expirationDate": "Dec 22, 2020"
+      },
+      {
+        "validityPeriod": "May 20, 2019",
+        "id": "sale0002",
+        "name": "Pocophone F1",
+        "barcode": "0737798652387",
+        "price": 75.0,
+        "rating": 4.5,
+        "category": "mobile",
+        "quantityInStock": 33.0,
+        "expirationDate": "Dec 13, 2020"
+      },
+      {
+        "validityPeriod": "May 1, 2019",
+        "id": "sale0003",
+        "name": "AirDots",
+        "barcode": "0711221932482",
+        "price": 120.0,
+        "rating": 4.0,
+        "category": "headphones",
+        "quantityInStock": 11.0,
+        "expirationDate": "Apr 12, 2020"
+      }
+    ],
+    "listOfFreeProduct": [
+      {
+        "quantityInOneHand": 1.0,
+        "id": "free0001",
+        "name": "Mi Band 3",
+        "barcode": "0614253125696",
+        "price": 0.0,
+        "rating": 4.5,
+        "category": "smartwatch",
+        "quantityInStock": 24.0,
+        "expirationDate": "Jun 6, 2020"
+      },
+      {
+        "quantityInOneHand": 1.0,
+        "id": "free0002",
+        "name": "Mi Box S",
+        "barcode": "0720643898887",
+        "price": 0.0,
+        "rating": 4.5,
+        "category": "media",
+        "quantityInStock": 16.0,
+        "expirationDate": "May 18, 2021"
+      }
+    ]
+  }
+]
