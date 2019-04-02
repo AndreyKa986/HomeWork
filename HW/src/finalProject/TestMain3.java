@@ -107,7 +107,9 @@ public class TestMain3 {
                             }
                             break;
                         case 0:
+                            break;
                         default:
+                            System.out.println("\nНеправильно введён номер операции\n");
                     }
                     break;
                 case 3:
@@ -121,13 +123,10 @@ public class TestMain3 {
                             scanner.nextLine();
                             store.id = scanner.nextLine();
                             System.out.println("\nВведите название:\n");
-                            scanner.nextLine();
                             store.name = scanner.nextLine();
                             System.out.println("\nВведите адрес:\n");
-                            scanner.nextLine();
                             store.address = scanner.nextLine();
                             System.out.println("\nВведите тип магазина:\n");
-                            scanner.nextLine();
                             store.typeOfStore = scanner.nextLine();
                             listStores.add(store);
                             isChanged = true;
@@ -148,10 +147,8 @@ public class TestMain3 {
                             scanner.nextLine();
                             String id = scanner.nextLine();
                             System.out.println("\nВведите название:\n");
-                            scanner.nextLine();
                             String name = scanner.nextLine();
                             System.out.println("\nВведите штрих-код:\n");
-                            scanner.nextLine();
                             String barcode = scanner.nextLine();
                             System.out.println("\nВведите рейтинг:\n");
                             double rating = scanner.nextDouble();
@@ -281,6 +278,7 @@ public class TestMain3 {
                                 continue;
                             }
                             listStores.remove(shop2);
+                            System.out.println("\nМагазин успешно удалён\n");
                             isChanged = true;
                             break;
                         case 2:
@@ -300,6 +298,7 @@ public class TestMain3 {
                                         continue;
                                     }
                                     listStores.get(shop3).listOfProduct.remove(number);
+                                    System.out.println("\nТовар успешно удалён\n");
                                     isChanged = true;
                                     break;
                                 case 2:
@@ -309,6 +308,7 @@ public class TestMain3 {
                                         continue;
                                     }
                                     listStores.get(shop3).listOfPromotionalProduct.remove(number);
+                                    System.out.println("\nТовар успешно удалён\n");
                                     isChanged = true;
                                     break;
                                 case 3:
@@ -318,6 +318,7 @@ public class TestMain3 {
                                         continue;
                                     }
                                     listStores.get(shop3).listOfFreeProduct.remove(number);
+                                    System.out.println("\nТовар успешно удалён\n");
                                     isChanged = true;
                                     break;
                                 default:
@@ -332,10 +333,12 @@ public class TestMain3 {
                     System.out.println("\nВведите строку для поиска:\n");
                     scanner.nextLine();
                     String stringForSearching = scanner.nextLine();
+                    boolean search=false;
                     for (Store store : listStores) {
                         if (store.id.contains(stringForSearching) || store.name.contains(stringForSearching) ||
                                 store.address.contains(stringForSearching) || store.typeOfStore.contains(stringForSearching)) {
                             System.out.println("\nНайденно совподение в магазине:\n");
+                            search=true;
                             store.show();
                         }
                         for (Product product : store.listOfProduct) {
@@ -346,6 +349,7 @@ public class TestMain3 {
                                     product.expirationDate.contains(stringForSearching) ||
                                     Integer.toString(product.quantityInStock).contains(stringForSearching)) {
                                 System.out.println("\nНайденно совподение в товаре:\n");
+                                search=true;
                                 product.print();
                             }
                         }
@@ -358,6 +362,7 @@ public class TestMain3 {
                                     Integer.toString(promotionalProduct.quantityInStock).contains(stringForSearching) ||
                                     promotionalProduct.validityPeriod.contains(stringForSearching)) {
                                 System.out.println("\nНайденно совподение в товаре:\n");
+                                search=true;
                                 promotionalProduct.print();
                             }
                         }
@@ -369,9 +374,13 @@ public class TestMain3 {
                                     Integer.toString(freeProduct.quantityInStock).contains(stringForSearching) ||
                                     Integer.toString(freeProduct.quantityInOneHand).contains(stringForSearching)) {
                                 System.out.println("\nНайденно совподение в товаре:\n");
+                                search=true;
                                 freeProduct.print();
                             }
                         }
+                    }
+                    if(!search){
+                        System.out.println("\nСовпадение не найденно\n");
                     }
                     break;
                 case 7:
@@ -400,6 +409,7 @@ public class TestMain3 {
                     }
                     writerHTML.flush();
                     writerHTML.close();
+                    System.out.println("\nHTML отчёт успешно создан\n");
                     break;
                 case 9:
                     System.out.println("\nВывести статистику для:\n" +
