@@ -609,6 +609,7 @@ public class Main {
                         product.expirationDate = expirationDate;
                     } else {
                         System.out.println("\nНеправильно введина дата\n");
+                        return false;
                     }
                     break;
                 case 9:
@@ -619,6 +620,7 @@ public class Main {
                         ((PromotionalProduct) product).validityPeriod = validityPeriod;
                     } else {
                         System.out.println("\nНеправильно введина дата\n");
+                        return false;
                     }
                     break;
                 case 10:
