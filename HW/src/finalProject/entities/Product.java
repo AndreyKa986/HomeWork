@@ -1,16 +1,16 @@
-package finalProject;
+package finalProject.entities;
 
 import java.util.Objects;
 
-class Product {
-    String id;
-    String name;
-    String barcode;
-    double price;
-    double rating;
-    String category;
-    int quantityInStock;
-    String expirationDate;
+public class Product {
+    public String id;
+    public String name;
+    public String barcode;
+    public double price;
+    public double rating;
+    public String category;
+    public int quantityInStock;
+    public String expirationDate;
 
     public Product() {
     }

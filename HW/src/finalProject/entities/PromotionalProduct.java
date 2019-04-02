@@ -1,9 +1,9 @@
-package finalProject;
+package finalProject.entities;
 
 import java.util.Objects;
 
 public class PromotionalProduct extends Product {
-    String validityPeriod;
+    public String validityPeriod;
 
     public PromotionalProduct() {
     }

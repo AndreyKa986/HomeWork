@@ -1,4 +1,6 @@
-package finalProject;
+package finalProject.comparators;
+
+import finalProject.entities.FreeProduct;
 
 public class FreeProductComparator  extends ProductComparator<FreeProduct> {
 

@@ -1,4 +1,4 @@
-package finalProject;
+package finalProject.entities;
 
 public class SimpleClass implements Comparable {
     String shopName;

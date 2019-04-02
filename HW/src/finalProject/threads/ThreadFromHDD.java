@@ -1,7 +1,8 @@
-package finalProject;
+package finalProject.threads;
 
 import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
+import finalProject.entities.Store;
 
 import java.io.FileReader;
 import java.io.IOException;

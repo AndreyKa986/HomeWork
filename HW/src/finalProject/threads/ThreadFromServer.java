@@ -1,7 +1,8 @@
-package finalProject;
+package finalProject.threads;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import finalProject.entities.Store;
 
 import javax.net.ssl.HttpsURLConnection;
 import java.io.BufferedReader;

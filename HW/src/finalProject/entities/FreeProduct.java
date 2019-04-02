@@ -1,9 +1,9 @@
-package finalProject;
+package finalProject.entities;
 
 import java.util.Objects;
 
 public class FreeProduct extends Product {
-    int quantityInOneHand;
+    public int quantityInOneHand;
 
     public FreeProduct() {
     }

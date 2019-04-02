@@ -1,4 +1,6 @@
-package finalProject;
+package finalProject.comparators;
+
+import finalProject.entities.PromotionalProduct;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

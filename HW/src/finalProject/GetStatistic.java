@@ -1,18 +1,23 @@
 package finalProject;
 
+import finalProject.entities.FreeProduct;
+import finalProject.entities.Product;
+import finalProject.entities.PromotionalProduct;
+import finalProject.entities.Store;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class StatClass {
-    private static StatClass instance;
+public class GetStatistic {
+    private static GetStatistic instance;
 
-    private StatClass() {
+    private GetStatistic() {
     }
 
-    public static StatClass getInstance() {
+    public static GetStatistic getInstance() {
         if (instance == null) {
-            instance = new StatClass();
+            instance = new GetStatistic();
         }
         return instance;
     }

@@ -1,4 +1,4 @@
-package finalProject;
+package finalProject.entities;
 
 import java.util.ArrayList;
 import java.util.Objects;

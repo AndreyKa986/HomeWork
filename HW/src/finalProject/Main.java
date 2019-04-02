@@ -2,6 +2,12 @@ package finalProject;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import finalProject.comparators.FreeProductComparator;
+import finalProject.comparators.ProductComparator;
+import finalProject.comparators.PromotionalProductComparator;
+import finalProject.entities.*;
+import finalProject.threads.ThreadFromHDD;
+import finalProject.threads.ThreadFromServer;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -11,7 +17,7 @@ import java.util.Objects;
 import java.util.Scanner;
 
 
-public class TestMain3 {
+public class Main {
     private static ArrayList<Store> listStores;
     private static Scanner scanner = new Scanner(System.in);
 
@@ -662,7 +668,7 @@ public class TestMain3 {
                 "2 - суммарное количество товаров по категориям\n" +
                 "3 - среднее количество товаров по категориям\n" +
                 "4 - суммарное количество всех товаров\n");
-        StatClass stat = StatClass.getInstance();
+        GetStatistic stat = GetStatistic.getInstance();
         switch (scanner.nextInt()) {
             case 1:
                 stat.showMiddlePriceOfAllCategory(store);
@@ -688,7 +694,7 @@ public class TestMain3 {
                 "2 - суммарное количество товаров по категориям\n" +
                 "3 - среднее количество товаров по категориям\n" +
                 "4 - суммарное количество всех товаров\n");
-        StatClass stat = StatClass.getInstance();
+        GetStatistic stat = GetStatistic.getInstance();
         switch (scanner.nextInt()) {
             case 1:
                 stat.showMiddlePriceOfAllCategory(arrayList);
