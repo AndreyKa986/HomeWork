@@ -1,11 +1,11 @@
 package finalProject.entities;
 
 public class SimpleClass implements Comparable {
-    String shopName;
-    String typeOfShop;
-    String categoryOfProduct;
-    String ratingOfProduct;
-    String productName;
+    public String shopName;
+    public String typeOfShop;
+    public String categoryOfProduct;
+    public String ratingOfProduct;
+    public String productName;
 
     public SimpleClass(String shopName, String typeOfShop, String categoryOfProduct, String ratingOfProduct, String productName) {
         this.shopName = shopName;

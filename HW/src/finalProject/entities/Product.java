@@ -15,8 +15,8 @@ public class Product {
     public Product() {
     }
 
-    Product(String id, String name, String barcode, double price, double rating, String category,
-            int quantityInStock, String expirationDate) {
+    public Product(String id, String name, String barcode, double price, double rating, String category,
+                   int quantityInStock, String expirationDate) {
         this.id = id;
         this.name = name;
         this.barcode = barcode;
@@ -32,7 +32,7 @@ public class Product {
         this(id, name, barcode, .0D, rating, category, quantityInStock, expirationDate);
     }
 
-    void print() {
+    public void print() {
         System.out.println("Название тавара: " + name);
         System.out.println("\tid: " + id);
         System.out.println("\tШтрихкод: " + barcode);
@@ -56,5 +56,19 @@ public class Product {
                 Objects.equals(category,that.category)&&
                 Objects.equals(quantityInStock,that.quantityInStock)&&
                 Objects.equals(expirationDate,that.expirationDate);
+    }
+
+    public void printInfoForProd() {
+        System.out.println("\nВыберите поле товара:\n" +
+                "1 - id\n" +
+                "2 - наименование\n" +
+                "3 - штрих-код\n" +
+                "4 - цена (отсутствует у бесплатного товара)\n" +
+                "5 - рейтинг\n" +
+                "6 - категория\n" +
+                "7 - количество товара\n" +
+                "8 - срок службы\n" +
+                "9 - дата окончания акции (только для акционного товара)\n" +
+                "10 - количество товара в одни руки (только для бесплатного товара)\n");
     }
 }

@@ -15,7 +15,7 @@ public class PromotionalProduct extends Product {
     }
 
     @Override
-    void print() {
+    public void print() {
         System.out.println("Название тавара: " + name);
         System.out.println("\tid: " + id);
         System.out.println("\tШтрихкод: " + barcode);

@@ -4,7 +4,7 @@ import finalProject.entities.Store;
 
 import java.util.List;
 
-interface StoreListener {
+public interface StoreListener {
     void onComplete(List<Store> list);
 }
 

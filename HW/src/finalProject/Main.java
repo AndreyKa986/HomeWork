@@ -16,7 +16,6 @@ import java.util.Collections;
 import java.util.Objects;
 import java.util.Scanner;
 
-
 public class Main {
     private static ArrayList<Store> listStores;
     private static Scanner scanner = new Scanner(System.in);
@@ -24,6 +23,8 @@ public class Main {
     public static void main(String[] args) throws InterruptedException, IOException {
         FileWriter writer = new FileWriter("text.txt");
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        Store str=new Store();
+        Product prd=new Product();
         ArrayList<Store> listFromHDD = new ArrayList<>();
         ArrayList<Store> listFromServer = new ArrayList<>();
         ThreadFromHDD threadFromHDD = new ThreadFromHDD(listFromHDD::addAll);
@@ -54,13 +55,13 @@ public class Main {
             key = scanner.nextInt();
             switch (key) {
                 case 1:
-                    sortStores(1);
+                    str.sortStores(1,listStores);
                     for (Store store : listStores) {
                         store.listOfProduct.sort(new ProductComparator<>(1));
                         store.listOfPromotionalProduct.sort(new PromotionalProductComparator(1));
                         store.listOfFreeProduct.sort(new FreeProductComparator(1));
                     }
-                    showList();
+                    str.showList(listStores);
                     break;
                 case 2:
                     System.out.println("\nВыберите данные для просмотра и сортировки:\n" +
@@ -71,26 +72,26 @@ public class Main {
                     int type;
                     switch (scanner.nextInt()) {
                         case 1:
-                            printInfoForSortShop();
-                            sortStores(scanner.nextInt());
-                            printInfoForProd();
+                            str.printInfoForSortShop();
+                            str.sortStores(scanner.nextInt(),listStores);
+                            prd.printInfoForProd();
                             type = scanner.nextInt();
                             for (Store store : listStores) {
                                 store.listOfProduct.sort(new ProductComparator<>(type));
                                 store.listOfPromotionalProduct.sort(new PromotionalProductComparator(type));
                                 store.listOfFreeProduct.sort(new FreeProductComparator(type));
                             }
-                            showList();
+                            str.showList(listStores);
                             break;
                         case 2:
-                            printInfoForSortShop();
-                            sortStores(scanner.nextInt());
-                            showStores();
+                            str.printInfoForSortShop();
+                            str.sortStores(scanner.nextInt(),listStores);
+                            str.showStores(listStores);
                             break;
                         case 3:
                             int shop = numberOfShop();
                             type = typeOfProduct();
-                            printInfoForProd();
+                            prd.printInfoForProd();
                             try {
                                 switch (type) {
                                     case 1:
@@ -245,7 +246,7 @@ public class Main {
                                 continue;
                             }
                             Product product = listStores.get(shop).listOfProduct.get(type);
-                            printInfoForProd();
+                            prd.printInfoForProd();
                             flag = changeObjectField(product, scanner.nextInt());
                             break;
                         case 6:
@@ -255,7 +256,7 @@ public class Main {
                                 continue;
                             }
                             PromotionalProduct promotionalProduct = listStores.get(shop).listOfPromotionalProduct.get(type);
-                            printInfoForProd();
+                            prd.printInfoForProd();
                             flag = changeObjectField(promotionalProduct, scanner.nextInt());
                             break;
                         case 7:
@@ -265,7 +266,7 @@ public class Main {
                                 continue;
                             }
                             FreeProduct freeProduct = listStores.get(shop).listOfFreeProduct.get(type);
-                            printInfoForProd();
+                            prd.printInfoForProd();
                             flag = changeObjectField(freeProduct, scanner.nextInt());
                     }
                     if (flag) {
@@ -526,58 +527,6 @@ public class Main {
         if (number == 1) {
             System.out.println("Установлены данные с диска.");
         }
-    }
-
-    private static void showList() {
-        listStores.forEach(Store::print);
-    }
-
-    private static void showStores() {
-        for (Store store : listStores) {
-            System.out.println("Название магазина: " + store.name);
-            System.out.println("\tid: " + store.id);
-            System.out.println("\tАдресс: " + store.address);
-            System.out.println("\tТип магазина: " + store.typeOfStore);
-        }
-    }
-
-    private static void sortStores(int i) {
-        listStores.sort((o1, o2) -> {
-            switch (i) {
-                case 1:
-                    return o1.id.compareTo(o2.id);
-                case 2:
-                    return o1.name.compareTo(o2.name);
-                case 3:
-                    return o1.address.compareTo(o2.address);
-                case 4:
-                    return o1.typeOfStore.compareTo(o2.typeOfStore);
-                default:
-                    return 0;
-            }
-        });
-    }
-
-    private static void printInfoForSortShop() {
-        System.out.println("\nВыберите по какому полю сортировать магазины:\n" +
-                "1 - id\n" +
-                "2 - Название\n" +
-                "3 - Адрес\n" +
-                "4 - Тип магазина\n");
-    }
-
-    private static void printInfoForProd() {
-        System.out.println("\nВыберите поле товара:\n" +
-                "1 - id\n" +
-                "2 - наименование\n" +
-                "3 - штрих-код\n" +
-                "4 - цена (отсутствует у бесплатного товара)\n" +
-                "5 - рейтинг\n" +
-                "6 - категория\n" +
-                "7 - количество товара\n" +
-                "8 - срок службы\n" +
-                "9 - дата окончания акции (только для акционного товара)\n" +
-                "10 - количество товара в одни руки (только для бесплатного товара)\n");
     }
 
     private static int numberOfShop() {

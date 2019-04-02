@@ -4,13 +4,13 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class Store {
-    String id;
-    String name;
-    String address;
-    String typeOfStore;
-    ArrayList<Product> listOfProduct;
-    ArrayList<PromotionalProduct> listOfPromotionalProduct;
-    ArrayList<FreeProduct> listOfFreeProduct;
+    public String id;
+    public String name;
+    public String address;
+    public String typeOfStore;
+    public ArrayList<Product> listOfProduct;
+    public ArrayList<PromotionalProduct> listOfPromotionalProduct;
+    public ArrayList<FreeProduct> listOfFreeProduct;
 
     public Store() {
         listOfProduct = new ArrayList<>();
@@ -28,7 +28,7 @@ public class Store {
         listOfFreeProduct = new ArrayList<>();
     }
 
-    void print() {
+    public void print() {
         System.out.println("Название магазина: " + name);
         System.out.println("\tid: " + id);
         System.out.println("\tАдресс: " + address);
@@ -48,7 +48,7 @@ public class Store {
         System.out.println("\n\t\t\t******\n");
     }
 
-    void show() {
+    public void show() {
         System.out.println("Название магазина: " + name);
         System.out.println("\tid: " + id);
         System.out.println("\tАдресс: " + address);
@@ -62,5 +62,43 @@ public class Store {
         return Objects.equals(name, that.name) &&
                 Objects.equals(address, that.address) &&
                 Objects.equals(typeOfStore, that.typeOfStore);
+    }
+
+    public void showList(ArrayList<Store>listStores) {
+        listStores.forEach(Store::print);
+    }
+
+    public void showStores(ArrayList<Store>listStores) {
+        for (Store store : listStores) {
+            System.out.println("Название магазина: " + store.name);
+            System.out.println("\tid: " + store.id);
+            System.out.println("\tАдресс: " + store.address);
+            System.out.println("\tТип магазина: " + store.typeOfStore);
+        }
+    }
+
+    public void sortStores(int i,ArrayList<Store>listStores) {
+        listStores.sort((o1, o2) -> {
+            switch (i) {
+                case 1:
+                    return o1.id.compareTo(o2.id);
+                case 2:
+                    return o1.name.compareTo(o2.name);
+                case 3:
+                    return o1.address.compareTo(o2.address);
+                case 4:
+                    return o1.typeOfStore.compareTo(o2.typeOfStore);
+                default:
+                    return 0;
+            }
+        });
+    }
+
+    public void printInfoForSortShop() {
+        System.out.println("\nВыберите по какому полю сортировать магазины:\n" +
+                "1 - id\n" +
+                "2 - Название\n" +
+                "3 - Адрес\n" +
+                "4 - Тип магазина\n");
     }
 }
