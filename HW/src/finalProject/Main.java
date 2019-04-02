@@ -15,6 +15,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Objects;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Main {
     private static ArrayList<Store> listStores;
@@ -23,8 +25,8 @@ public class Main {
     public static void main(String[] args) throws InterruptedException, IOException {
         FileWriter writer = new FileWriter("text.txt");
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        Store str=new Store();
-        Product prd=new Product();
+        Store str = new Store();
+        Product prd = new Product();
         ArrayList<Store> listFromHDD = new ArrayList<>();
         ArrayList<Store> listFromServer = new ArrayList<>();
         ThreadFromHDD threadFromHDD = new ThreadFromHDD(listFromHDD::addAll);
@@ -55,7 +57,7 @@ public class Main {
             key = scanner.nextInt();
             switch (key) {
                 case 1:
-                    str.sortStores(1,listStores);
+                    str.sortStores(1, listStores);
                     for (Store store : listStores) {
                         store.listOfProduct.sort(new ProductComparator<>(1));
                         store.listOfPromotionalProduct.sort(new PromotionalProductComparator(1));
@@ -73,7 +75,7 @@ public class Main {
                     switch (scanner.nextInt()) {
                         case 1:
                             str.printInfoForSortShop();
-                            str.sortStores(scanner.nextInt(),listStores);
+                            str.sortStores(scanner.nextInt(), listStores);
                             prd.printInfoForProd();
                             type = scanner.nextInt();
                             for (Store store : listStores) {
@@ -85,7 +87,7 @@ public class Main {
                             break;
                         case 2:
                             str.printInfoForSortShop();
-                            str.sortStores(scanner.nextInt(),listStores);
+                            str.sortStores(scanner.nextInt(), listStores);
                             str.showStores(listStores);
                             break;
                         case 3:
@@ -167,6 +169,10 @@ public class Main {
                             System.out.println("\nВведите срок службы (например: Feb 7, 2019):\n");
                             scanner.nextLine();
                             String expirationDate = scanner.nextLine();
+                            if(!validationCheck(expirationDate)){
+                                System.out.println("\nНеправильно введина дата\n");
+                                continue;
+                            }
                             switch (type) {
                                 case 1:
                                     System.out.println("\nВведите цену:\n");
@@ -179,7 +185,12 @@ public class Main {
                                     System.out.println("\nВведите срок действия акции (например: Feb 7, 2019):\n");
                                     scanner.nextLine();
                                     String validityPeriod = scanner.nextLine();
-                                    listStores.get(shop).listOfPromotionalProduct.add(new PromotionalProduct(id, name, barcode, price2, rating, category, quantityInStock, expirationDate, validityPeriod));
+                                    if (validationCheck(validityPeriod)) {
+                                        listStores.get(shop).listOfPromotionalProduct.add(new PromotionalProduct(id, name, barcode, price2, rating, category, quantityInStock, expirationDate, validityPeriod));
+                                    } else {
+                                        System.out.println("\nНеправильно введина дата\n");
+                                        continue;
+                                    }
                                     break;
                                 case 3:
                                     System.out.println("\nВведите количество товара в одни руки:\n");
@@ -340,12 +351,12 @@ public class Main {
                     System.out.println("\nВведите строку для поиска:\n");
                     scanner.nextLine();
                     String stringForSearching = scanner.nextLine();
-                    boolean search=false;
+                    boolean search = false;
                     for (Store store : listStores) {
                         if (store.id.contains(stringForSearching) || store.name.contains(stringForSearching) ||
                                 store.address.contains(stringForSearching) || store.typeOfStore.contains(stringForSearching)) {
                             System.out.println("\nНайденно совподение в магазине:\n");
-                            search=true;
+                            search = true;
                             store.show();
                         }
                         for (Product product : store.listOfProduct) {
@@ -356,7 +367,7 @@ public class Main {
                                     product.expirationDate.contains(stringForSearching) ||
                                     Integer.toString(product.quantityInStock).contains(stringForSearching)) {
                                 System.out.println("\nНайденно совподение в товаре:\n");
-                                search=true;
+                                search = true;
                                 product.print();
                             }
                         }
@@ -369,7 +380,7 @@ public class Main {
                                     Integer.toString(promotionalProduct.quantityInStock).contains(stringForSearching) ||
                                     promotionalProduct.validityPeriod.contains(stringForSearching)) {
                                 System.out.println("\nНайденно совподение в товаре:\n");
-                                search=true;
+                                search = true;
                                 promotionalProduct.print();
                             }
                         }
@@ -381,12 +392,12 @@ public class Main {
                                     Integer.toString(freeProduct.quantityInStock).contains(stringForSearching) ||
                                     Integer.toString(freeProduct.quantityInOneHand).contains(stringForSearching)) {
                                 System.out.println("\nНайденно совподение в товаре:\n");
-                                search=true;
+                                search = true;
                                 freeProduct.print();
                             }
                         }
                     }
-                    if(!search){
+                    if (!search) {
                         System.out.println("\nСовпадение не найденно\n");
                     }
                     break;
@@ -397,22 +408,22 @@ public class Main {
                     isChanged = false;
                     break;
                 case 8:
-                    ArrayList<SimpleClass>list=new ArrayList<>();
-                    for(Store store:listStores){
-                        for(Product product:store.listOfProduct){
-                            list.add(new SimpleClass(store.name,store.typeOfStore,product.category,Double.toString(product.rating),product.name));
+                    ArrayList<SimpleClass> list = new ArrayList<>();
+                    for (Store store : listStores) {
+                        for (Product product : store.listOfProduct) {
+                            list.add(new SimpleClass(store.name, store.typeOfStore, product.category, Double.toString(product.rating), product.name));
                         }
-                        for(PromotionalProduct product:store.listOfPromotionalProduct){
-                            list.add(new SimpleClass(store.name,store.typeOfStore,product.category,Double.toString(product.rating),product.name));
+                        for (PromotionalProduct product : store.listOfPromotionalProduct) {
+                            list.add(new SimpleClass(store.name, store.typeOfStore, product.category, Double.toString(product.rating), product.name));
                         }
-                        for(FreeProduct product:store.listOfFreeProduct){
-                            list.add(new SimpleClass(store.name,store.typeOfStore,product.category,Double.toString(product.rating),product.name));
+                        for (FreeProduct product : store.listOfFreeProduct) {
+                            list.add(new SimpleClass(store.name, store.typeOfStore, product.category, Double.toString(product.rating), product.name));
                         }
                     }
                     Collections.sort(list);
-                    FileWriter writerHTML=new FileWriter("table.html");
-                    for(SimpleClass sim:list){
-                        writerHTML.write(String.format("%-20s%-20s%-20s%-20s%-20s\n",sim.shopName,sim.typeOfShop,sim.categoryOfProduct,sim.ratingOfProduct,sim.productName));
+                    FileWriter writerHTML = new FileWriter("table.html");
+                    for (SimpleClass sim : list) {
+                        writerHTML.write(String.format("%-20s%-20s%-20s%-20s%-20s\n", sim.shopName, sim.typeOfShop, sim.categoryOfProduct, sim.ratingOfProduct, sim.productName));
                     }
                     writerHTML.flush();
                     writerHTML.close();
@@ -593,22 +604,33 @@ public class Main {
                 case 8:
                     System.out.println("\nВведите новую дату окончания срока службы (например: Feb 7, 2019):\n");
                     scanner.nextLine();
-                    product.expirationDate = scanner.nextLine();
+                    String expirationDate = scanner.nextLine();
+                    if (validationCheck(expirationDate)) {
+                        product.expirationDate = expirationDate;
+                    } else {
+                        System.out.println("\nНеправильно введина дата\n");
+                    }
                     break;
                 case 9:
                     System.out.println("\nВведите новую дату окончания акции (например: Feb 7, 2019):\n");
                     scanner.nextLine();
-                    ((PromotionalProduct)product).validityPeriod = scanner.nextLine();
+                    String validityPeriod = scanner.nextLine();
+                    if (validationCheck(validityPeriod)) {
+                        ((PromotionalProduct) product).validityPeriod = validityPeriod;
+                    } else {
+                        System.out.println("\nНеправильно введина дата\n");
+                    }
                     break;
                 case 10:
                     System.out.println("\nВведите новое количество товара отпускаемого в одни руки:\n");
-                    ((FreeProduct)product).quantityInOneHand = scanner.nextInt();
+                    ((FreeProduct) product).quantityInOneHand = scanner.nextInt();
             }
             System.out.println("\nИзменения успешно внесены\n");
             return true;
         } else {
             System.out.println("\nНеправильно введён номер поля.\n");
-            return false;}
+            return false;
+        }
     }
 
     private static void showStatistic(Store store) {
@@ -661,5 +683,11 @@ public class Main {
                 System.out.println("\nНеправильно введён номер операции.\n");
         }
         System.out.println();
+    }
+
+    private static boolean validationCheck(String string) {
+        Pattern pattern = Pattern.compile("^((Jan)|(Feb)|(Mar)|(Apr)|(May)|(Jun)|(Jul)|(Aug)|(Sep)|(Oct)|(Nov)|(Dec))\\s[1,2]?\\d(, )(\\d){4}$");
+        Matcher matcher = pattern.matcher(string);
+        return matcher.matches();
     }
 }
