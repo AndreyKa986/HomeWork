@@ -9,7 +9,6 @@ import finalProject.entities.*;
 import finalProject.threads.ThreadFromHDD;
 import finalProject.threads.ThreadFromServer;
 
-import javax.swing.text.html.HTMLDocument;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
