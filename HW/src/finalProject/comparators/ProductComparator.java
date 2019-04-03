@@ -7,9 +7,9 @@ import java.text.SimpleDateFormat;
 import java.util.Comparator;
 import java.util.Locale;
 
-public class ProductComparator <T extends Product> implements Comparator<T> {
+public class ProductComparator<T extends Product> implements Comparator<T> {
 
-    protected int sortType;
+    int sortType;
 
     public ProductComparator(int sortType) {
         this.sortType = sortType;

@@ -2,7 +2,7 @@ package finalProject.comparators;
 
 import finalProject.entities.FreeProduct;
 
-public class FreeProductComparator  extends ProductComparator<FreeProduct> {
+public class FreeProductComparator extends ProductComparator<FreeProduct> {
 
     public FreeProductComparator(int sortType) {
         super(sortType);

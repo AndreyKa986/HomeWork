@@ -31,15 +31,15 @@ public class PromotionalProduct extends Product {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        PromotionalProduct that=(PromotionalProduct) o;
-        return Objects.equals(id,that.id)&&
-                Objects.equals(name,that.name)&&
-                Objects.equals(barcode,that.barcode)&&
-                Objects.equals(price,that.price)&&
-                Objects.equals(rating,that.rating)&&
-                Objects.equals(category,that.category)&&
-                Objects.equals(quantityInStock,that.quantityInStock)&&
-                Objects.equals(expirationDate,that.expirationDate)&&
-                Objects.equals(validityPeriod,that.validityPeriod);
+        PromotionalProduct that = (PromotionalProduct) o;
+        return Objects.equals(id, that.id) &&
+                Objects.equals(name, that.name) &&
+                Objects.equals(barcode, that.barcode) &&
+                Objects.equals(price, that.price) &&
+                Objects.equals(rating, that.rating) &&
+                Objects.equals(category, that.category) &&
+                Objects.equals(quantityInStock, that.quantityInStock) &&
+                Objects.equals(expirationDate, that.expirationDate) &&
+                Objects.equals(validityPeriod, that.validityPeriod);
     }
 }

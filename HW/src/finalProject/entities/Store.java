@@ -64,11 +64,11 @@ public class Store {
                 Objects.equals(typeOfStore, that.typeOfStore);
     }
 
-    public void showList(ArrayList<Store>listStores) {
+    public void showList(ArrayList<Store> listStores) {
         listStores.forEach(Store::print);
     }
 
-    public void showStores(ArrayList<Store>listStores) {
+    public void showStores(ArrayList<Store> listStores) {
         for (Store store : listStores) {
             System.out.println("Название магазина: " + store.name);
             System.out.println("\tid: " + store.id);
@@ -77,7 +77,7 @@ public class Store {
         }
     }
 
-    public void sortStores(int i,ArrayList<Store>listStores) {
+    public void sortStores(int i, ArrayList<Store> listStores) {
         listStores.sort((o1, o2) -> {
             switch (i) {
                 case 1:

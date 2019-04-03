@@ -47,15 +47,15 @@ public class Product {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Product that=(Product)o;
-        return Objects.equals(id,that.id)&&
-                Objects.equals(name,that.name)&&
-                Objects.equals(barcode,that.barcode)&&
-                Objects.equals(price,that.price)&&
-                Objects.equals(rating,that.rating)&&
-                Objects.equals(category,that.category)&&
-                Objects.equals(quantityInStock,that.quantityInStock)&&
-                Objects.equals(expirationDate,that.expirationDate);
+        Product that = (Product) o;
+        return Objects.equals(id, that.id) &&
+                Objects.equals(name, that.name) &&
+                Objects.equals(barcode, that.barcode) &&
+                Objects.equals(price, that.price) &&
+                Objects.equals(rating, that.rating) &&
+                Objects.equals(category, that.category) &&
+                Objects.equals(quantityInStock, that.quantityInStock) &&
+                Objects.equals(expirationDate, that.expirationDate);
     }
 
     public void printInfoForProd() {

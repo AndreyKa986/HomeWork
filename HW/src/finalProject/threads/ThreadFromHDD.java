@@ -29,8 +29,9 @@ public class ThreadFromHDD extends Thread {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        Type listType = new TypeToken<ArrayList<Store>>(){}.getType();
-        List<Store> listFromHDD =new Gson().fromJson(builder.toString(), listType);
+        Type listType = new TypeToken<ArrayList<Store>>() {
+        }.getType();
+        List<Store> listFromHDD = new Gson().fromJson(builder.toString(), listType);
         System.out.println("Загрузка с жёсткого диска завершена.");
         storeListener.onComplete(listFromHDD);
     }

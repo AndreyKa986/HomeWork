@@ -35,7 +35,8 @@ public class ThreadFromServer extends Thread {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        Type listType = new TypeToken<ArrayList<Store>>(){}.getType();
+        Type listType = new TypeToken<ArrayList<Store>>() {
+        }.getType();
         List<Store> listFromServer = new Gson().fromJson(builder.toString(), listType);
         System.out.println("Загрузка с сервера завершена.");
         storeListener.onComplete(listFromServer);

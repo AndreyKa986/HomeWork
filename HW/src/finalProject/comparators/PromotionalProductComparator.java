@@ -6,7 +6,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 
-public class PromotionalProductComparator  extends ProductComparator<PromotionalProduct> {
+public class PromotionalProductComparator extends ProductComparator<PromotionalProduct> {
 
     public PromotionalProductComparator(int sortType) {
         super(sortType);

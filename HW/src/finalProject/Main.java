@@ -169,7 +169,7 @@ public class Main {
                             System.out.println("\nВведите срок службы (например: Feb 7, 2019):\n");
                             scanner.nextLine();
                             String expirationDate = scanner.nextLine();
-                            if(!validationCheck(expirationDate)){
+                            if (!validationCheck(expirationDate)) {
                                 System.out.println("\nНеправильно введина дата\n");
                                 continue;
                             }
@@ -408,21 +408,21 @@ public class Main {
                     isChanged = false;
                     break;
                 case 8:
-                    ArrayList<SimpleClass> list = new ArrayList<>();
+                    ArrayList<ClassForHTML> list = new ArrayList<>();
                     for (Store store : listStores) {
                         for (Product product : store.listOfProduct) {
-                            list.add(new SimpleClass(store.name, store.typeOfStore, product.category, Double.toString(product.rating), product.name));
+                            list.add(new ClassForHTML(store.name, store.typeOfStore, product.category, Double.toString(product.rating), product.name));
                         }
                         for (PromotionalProduct product : store.listOfPromotionalProduct) {
-                            list.add(new SimpleClass(store.name, store.typeOfStore, product.category, Double.toString(product.rating), product.name));
+                            list.add(new ClassForHTML(store.name, store.typeOfStore, product.category, Double.toString(product.rating), product.name));
                         }
                         for (FreeProduct product : store.listOfFreeProduct) {
-                            list.add(new SimpleClass(store.name, store.typeOfStore, product.category, Double.toString(product.rating), product.name));
+                            list.add(new ClassForHTML(store.name, store.typeOfStore, product.category, Double.toString(product.rating), product.name));
                         }
                     }
                     Collections.sort(list);
                     FileWriter writerHTML = new FileWriter("table.html");
-                    for (SimpleClass sim : list) {
+                    for (ClassForHTML sim : list) {
                         writerHTML.write(String.format("%-20s%-20s%-20s%-20s%-20s\n", sim.shopName, sim.typeOfShop, sim.categoryOfProduct, sim.ratingOfProduct, sim.productName));
                     }
                     writerHTML.flush();
@@ -452,7 +452,7 @@ public class Main {
                     break;
                 case 0:
                     if (isChanged) {
-                        System.out.println("\nЕсть не сохраненные данныею\n" +
+                        System.out.println("\nЕсть не сохраненные данные:\n" +
                                 "Желаете сохранить?\n1 - да\n2 - нет\n");
                         int choice = scanner.nextInt();
                         if (choice == 1) {
@@ -641,7 +641,7 @@ public class Main {
                 "2 - суммарное количество товаров по категориям\n" +
                 "3 - среднее количество товаров по категориям\n" +
                 "4 - суммарное количество всех товаров\n");
-        GetStatistic stat = GetStatistic.getInstance();
+        StatisticPrinter stat = StatisticPrinter.getInstance();
         switch (scanner.nextInt()) {
             case 1:
                 stat.showMiddlePriceOfAllCategory(store);
@@ -650,7 +650,7 @@ public class Main {
                 stat.showQuantityInAllCategory(store);
                 break;
             case 3:
-                stat.showMiddleQuantityproductFormCategory(store);
+                stat.showMiddleQuantityproductFromCategory(store);
                 break;
             case 4:
                 stat.printQuantityAllProduct(store);
@@ -667,7 +667,7 @@ public class Main {
                 "2 - суммарное количество товаров по категориям\n" +
                 "3 - среднее количество товаров по категориям\n" +
                 "4 - суммарное количество всех товаров\n");
-        GetStatistic stat = GetStatistic.getInstance();
+        StatisticPrinter stat = StatisticPrinter.getInstance();
         switch (scanner.nextInt()) {
             case 1:
                 stat.showMiddlePriceOfAllCategory(arrayList);
@@ -676,7 +676,7 @@ public class Main {
                 stat.showQuantityInAllCategory(arrayList);
                 break;
             case 3:
-                stat.showMiddleQuantityproductFormCategory(arrayList);
+                stat.showMiddleQuantityproductFromCategory(arrayList);
                 break;
             case 4:
                 stat.printQuantityAllProduct(arrayList);

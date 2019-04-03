@@ -9,20 +9,20 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class GetStatistic {
-    private static GetStatistic instance;
+public class StatisticPrinter {
+    private static StatisticPrinter instance;
 
-    private GetStatistic() {
+    private StatisticPrinter() {
     }
 
-    public static GetStatistic getInstance() {
+    public static StatisticPrinter getInstance() {
         if (instance == null) {
-            instance = new GetStatistic();
+            instance = new StatisticPrinter();
         }
         return instance;
     }
 
-    public void showMiddlePriceOfAllCategory(Store store) {
+    void showMiddlePriceOfAllCategory(Store store) {
         Map<String, Price> priceMap = new HashMap<>();
         Price price;
         if (!store.listOfProduct.isEmpty()) {
@@ -55,13 +55,11 @@ public class GetStatistic {
         }
         if (!priceMap.isEmpty()) {
             System.out.println("\nСписок средней стоимости магазина " + store.name + " (id: " + store.id + "):");
-            priceMap.forEach((key, value) -> {
-                System.out.printf("%s - %.1f\n", key, value.price / value.number);
-            });
+            priceMap.forEach((key, value) -> System.out.printf("%s - %.1f\n", key, value.price / value.number));
         } else System.out.println("\nПродукция отсутсвует\n");
     }
 
-    public void showMiddlePriceOfAllCategory(ArrayList<Store> arrayList) {
+    void showMiddlePriceOfAllCategory(ArrayList<Store> arrayList) {
         Map<String, Price> priceMap = new HashMap<>();
         Price price;
         for (Store store : arrayList) {
@@ -96,13 +94,11 @@ public class GetStatistic {
         }
         if (!priceMap.isEmpty()) {
             System.out.println("\nСписок средней стоимости во всех магазинах:");
-            priceMap.forEach((key, value) -> {
-                System.out.printf("%s - %.1f\n", key, value.price / value.number);
-            });
+            priceMap.forEach((key, value) -> System.out.printf("%s - %.1f\n", key, value.price / value.number));
         } else System.out.println("\nПродукция отсутсвует\n");
     }
 
-    public void showQuantityInAllCategory(Store store) {
+    void showQuantityInAllCategory(Store store) {
         Map<String, Price> priceMap = new HashMap<>();
         Price price;
         if (!store.listOfProduct.isEmpty()) {
@@ -149,13 +145,11 @@ public class GetStatistic {
         }
         if (!priceMap.isEmpty()) {
             System.out.println("\nСписок суммарного количества товаров магазина " + store.name + " (id: " + store.id + "):");
-            priceMap.forEach((key, value) -> {
-                System.out.println(key + " - " + value.number);
-            });
+            priceMap.forEach((key, value) -> System.out.println(key + " - " + value.number));
         } else System.out.println("\nПродукция отсутсвует\n");
     }
 
-    public void showQuantityInAllCategory(ArrayList<Store> arrayList) {
+    void showQuantityInAllCategory(ArrayList<Store> arrayList) {
         Map<String, Price> priceMap = new HashMap<>();
         Price price;
         for (Store store : arrayList) {
@@ -204,13 +198,11 @@ public class GetStatistic {
         }
         if (!priceMap.isEmpty()) {
             System.out.println("\nСписок суммарного количества товаров во всех магазинах:");
-            priceMap.forEach((key, value) -> {
-                System.out.println(key + " - " + value.number);
-            });
+            priceMap.forEach((key, value) -> System.out.println(key + " - " + value.number));
         } else System.out.println("\nПродукция отсутсвует\n");
     }
 
-    public void showMiddleQuantityproductFormCategory(Store store) {
+    void showMiddleQuantityproductFromCategory(Store store) {
         Map<String, Price> priceMap = new HashMap<>();
         Price price;
         if (!store.listOfProduct.isEmpty()) {
@@ -257,13 +249,11 @@ public class GetStatistic {
         }
         if (!priceMap.isEmpty()) {
             System.out.println("\nСписок среднего количества товаров магазина " + store.name + " (id: " + store.id + "):");
-            priceMap.forEach((key, value) -> {
-                System.out.printf("%s - %.1f\n", key, value.price / value.number);
-            });
+            priceMap.forEach((key, value) -> System.out.printf("%s - %.1f\n", key, value.price / value.number));
         } else System.out.println("\nПродукция отсутсвует\n");
     }
 
-    public void showMiddleQuantityproductFormCategory(ArrayList<Store> arrayList) {
+    void showMiddleQuantityproductFromCategory(ArrayList<Store> arrayList) {
         Map<String, Price> priceMap = new HashMap<>();
         Price price;
         for (Store store : arrayList) {
@@ -312,13 +302,24 @@ public class GetStatistic {
         }
         if (!priceMap.isEmpty()) {
             System.out.println("\nСписок среднего количества товаров во всех магазинах:");
-            priceMap.forEach((key, value) -> {
-                System.out.printf("%s - %.1f\n", key, value.price / value.number);
-            });
+            priceMap.forEach((key, value) -> System.out.printf("%s - %.1f\n", key, value.price / value.number));
         } else System.out.println("\nПродукция отсутсвует\n");
     }
 
-    public void printQuantityAllProduct(Store store) {
+    void printQuantityAllProduct(Store store) {
+        int quantity = quantityAllProduct(store);
+        System.out.println("Количество товаров в магазине " + store.name + " (id: " + store.id + ") - " + quantity);
+    }
+
+    void printQuantityAllProduct(ArrayList<Store> arrayList) {
+        int quantity = 0;
+        for (Store store : arrayList) {
+            quantity += quantityAllProduct(store);
+        }
+        System.out.println("Количество товаров во всех магазинах - " + quantity);
+    }
+
+    private int quantityAllProduct(Store store) {
         int quantity = 0;
         if (!store.listOfProduct.isEmpty()) {
             for (Product product : store.listOfProduct) {
@@ -335,41 +336,19 @@ public class GetStatistic {
                 quantity += freeProduct.quantityInStock;
             }
         }
-        System.out.println("Количество товаров в магазине " + store.name + " (id: " + store.id + ") - " + quantity);
-    }
-
-    public void printQuantityAllProduct(ArrayList<Store> arrayList) {
-        int quantity = 0;
-        for (Store store : arrayList) {
-            if (!store.listOfProduct.isEmpty()) {
-                for (Product product : store.listOfProduct) {
-                    quantity += product.quantityInStock;
-                }
-            }
-            if (!store.listOfPromotionalProduct.isEmpty()) {
-                for (PromotionalProduct promotionalProduct : store.listOfPromotionalProduct) {
-                    quantity += promotionalProduct.quantityInStock;
-                }
-            }
-            if (!store.listOfFreeProduct.isEmpty()) {
-                for (FreeProduct freeProduct : store.listOfFreeProduct) {
-                    quantity += freeProduct.quantityInStock;
-                }
-            }
-        }
-        System.out.println("Количество товаров во всех магазинах - " + quantity);
+        return quantity;
     }
 
     public static class Price {
         double price;
         int number;
 
-        public Price(double price, int number) {
+        Price(double price, int number) {
             this.price = price;
             this.number = number;
         }
 
-        public Price(int number) {
+        Price(int number) {
             this(.0D, number);
         }
     }
