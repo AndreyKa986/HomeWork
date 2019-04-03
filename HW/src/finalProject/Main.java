@@ -9,6 +9,7 @@ import finalProject.entities.*;
 import finalProject.threads.ThreadFromHDD;
 import finalProject.threads.ThreadFromServer;
 
+import javax.swing.text.html.HTMLDocument;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -21,12 +22,13 @@ import java.util.regex.Pattern;
 public class Main {
     private static ArrayList<Store> listStores;
     private static Scanner scanner = new Scanner(System.in);
+    private static Store str = new Store();
+    private static Product prd = new Product();
+    private static boolean isChanged = false;
 
     public static void main(String[] args) throws InterruptedException, IOException {
         FileWriter writer = new FileWriter("text.txt");
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        Store str = new Store();
-        Product prd = new Product();
         ArrayList<Store> listFromHDD = new ArrayList<>();
         ArrayList<Store> listFromServer = new ArrayList<>();
         ThreadFromHDD threadFromHDD = new ThreadFromHDD(listFromHDD::addAll);
@@ -41,7 +43,7 @@ public class Main {
         }
         createList(listFromHDD, listFromServer);
         int key = 1;
-        boolean isChanged = false;
+        int type;
         while (key != 0) {
             System.out.println("Выберите действие:\n" +
                     "1 - просматреть все данные (отсортированные по id)\n" +
@@ -70,139 +72,14 @@ public class Main {
                             "1 - Все магазины и товары\n" +
                             "2 - Все магазины без списков товаров\n" +
                             "3 - Список товаров одного магазина\n" +
-                            "0 - Ввернуться в главное меню\n");
-                    int type;
-                    switch (scanner.nextInt()) {
-                        case 1:
-                            str.printInfoForSortShop();
-                            str.sortStores(scanner.nextInt(), listStores);
-                            prd.printInfoForProd();
-                            type = scanner.nextInt();
-                            for (Store store : listStores) {
-                                store.listOfProduct.sort(new ProductComparator<>(type));
-                                store.listOfPromotionalProduct.sort(new PromotionalProductComparator(type));
-                                store.listOfFreeProduct.sort(new FreeProductComparator(type));
-                            }
-                            str.showList(listStores);
-                            break;
-                        case 2:
-                            str.printInfoForSortShop();
-                            str.sortStores(scanner.nextInt(), listStores);
-                            str.showStores(listStores);
-                            break;
-                        case 3:
-                            int shop = numberOfShop();
-                            type = typeOfProduct();
-                            prd.printInfoForProd();
-                            try {
-                                switch (type) {
-                                    case 1:
-                                        listStores.get(shop).listOfProduct.sort(new ProductComparator<>(scanner.nextInt()));
-                                        listStores.get(shop).listOfProduct.forEach(Product::print);
-                                        break;
-                                    case 2:
-                                        listStores.get(shop).listOfPromotionalProduct.sort(new PromotionalProductComparator(scanner.nextInt()));
-                                        listStores.get(shop).listOfPromotionalProduct.forEach(PromotionalProduct::print);
-                                        break;
-                                    case 3:
-                                        listStores.get(shop).listOfFreeProduct.sort(new FreeProductComparator(scanner.nextInt()));
-                                        listStores.get(shop).listOfFreeProduct.forEach(FreeProduct::print);
-                                        break;
-                                    default:
-                                        System.out.println("\nНеправильно введён номер типа товара!!!\n");
-                                }
-                            } catch (IndexOutOfBoundsException e) {
-                                System.out.println("\nНеправильно введён номер магазина!!!\n");
-                            }
-                            break;
-                        case 0:
-                            break;
-                        default:
-                            System.out.println("\nНеправильно введён номер операции\n");
-                    }
+                            "0 - Вернуться в главное меню\n");
+                    selectDataToViewAndSort(scanner.nextInt());
                     break;
                 case 3:
                     System.out.println("\nВыберите что требуется создать:\n" +
                             "1 - новый магазин\n" +
                             "2 - новый товар\n");
-                    switch (scanner.nextInt()) {
-                        case 1:
-                            Store store = new Store();
-                            System.out.println("\nВведите id:\n");
-                            scanner.nextLine();
-                            store.id = scanner.nextLine();
-                            System.out.println("\nВведите название:\n");
-                            store.name = scanner.nextLine();
-                            System.out.println("\nВведите адрес:\n");
-                            store.address = scanner.nextLine();
-                            System.out.println("\nВведите тип магазина:\n");
-                            store.typeOfStore = scanner.nextLine();
-                            listStores.add(store);
-                            isChanged = true;
-                            System.out.println("\nНовый магазин успешно создан\n");
-                            break;
-                        case 2:
-                            int shop = numberOfShop();
-                            if (shop < 0 || listStores.size() <= shop) {
-                                System.out.println("\nНеправильно введён номер магазина!!!\n");
-                                continue;
-                            }
-                            type = typeOfProduct();
-                            if (type < 0 || 3 < type) {
-                                System.out.println("\nНеправильно введён номер типа товара!!!\n");
-                                continue;
-                            }
-                            System.out.println("\nВведите id нового товара:\n");
-                            scanner.nextLine();
-                            String id = scanner.nextLine();
-                            System.out.println("\nВведите название:\n");
-                            String name = scanner.nextLine();
-                            System.out.println("\nВведите штрих-код:\n");
-                            String barcode = scanner.nextLine();
-                            System.out.println("\nВведите рейтинг:\n");
-                            double rating = scanner.nextDouble();
-                            System.out.println("\nВведите категорию:\n");
-                            scanner.nextLine();
-                            String category = scanner.nextLine();
-                            System.out.println("\nВведите количество товара:\n");
-                            int quantityInStock = scanner.nextInt();
-                            System.out.println("\nВведите срок службы (например: Feb 7, 2019):\n");
-                            scanner.nextLine();
-                            String expirationDate = scanner.nextLine();
-                            if (!validationCheck(expirationDate)) {
-                                System.out.println("\nНеправильно введина дата\n");
-                                continue;
-                            }
-                            switch (type) {
-                                case 1:
-                                    System.out.println("\nВведите цену:\n");
-                                    double price = scanner.nextDouble();
-                                    listStores.get(shop).listOfProduct.add(new Product(id, name, barcode, price, rating, category, quantityInStock, expirationDate));
-                                    break;
-                                case 2:
-                                    System.out.println("\nВведите цену:\n");
-                                    double price2 = scanner.nextDouble();
-                                    System.out.println("\nВведите срок действия акции (например: Feb 7, 2019):\n");
-                                    scanner.nextLine();
-                                    String validityPeriod = scanner.nextLine();
-                                    if (validationCheck(validityPeriod)) {
-                                        listStores.get(shop).listOfPromotionalProduct.add(new PromotionalProduct(id, name, barcode, price2, rating, category, quantityInStock, expirationDate, validityPeriod));
-                                    } else {
-                                        System.out.println("\nНеправильно введина дата\n");
-                                        continue;
-                                    }
-                                    break;
-                                case 3:
-                                    System.out.println("\nВведите количество товара в одни руки:\n");
-                                    int quantityInOneHand = scanner.nextInt();
-                                    listStores.get(shop).listOfFreeProduct.add(new FreeProduct(id, name, barcode, rating, category, quantityInStock, expirationDate, quantityInOneHand));
-                            }
-                            isChanged = true;
-                            System.out.println("\nНовый продукт успешно создан\n");
-                            break;
-                        default:
-                            System.out.println("\nНеправильно выбран номер!!!\n");
-                    }
+                    chooseWhatToCreate(scanner.nextInt());
                     break;
                 case 4:
                     System.out.println("\nВыберите магазин в который желаете внести изменения\n");
@@ -211,7 +88,7 @@ public class Main {
                         System.out.println("\nНеправильно введён номер магазина!!!\n");
                         continue;
                     }
-                    System.out.println("\nВыберите поле или спиок для редоктирования\n" +
+                    System.out.println("\nВыберите поле или список для редоктирования\n" +
                             "1 - id\n" +
                             "2 - название\n" +
                             "3 - адрес\n" +
@@ -224,63 +101,7 @@ public class Main {
                         System.out.println("\nНеправильно выбран номер!!!\n");
                         continue;
                     }
-                    boolean flag = true;
-                    switch (type) {
-                        case 1:
-                            System.out.println("\nВведите новый id\n");
-                            scanner.nextLine();
-                            listStores.get(shop).id = scanner.nextLine();
-                            System.out.println("\nЗапись успешно обновлена\n");
-                            break;
-                        case 2:
-                            System.out.println("\nВведите новое название\n");
-                            scanner.nextLine();
-                            listStores.get(shop).name = scanner.nextLine();
-                            System.out.println("\nЗапись успешно обновлена\n");
-                            break;
-                        case 3:
-                            System.out.println("\nВведите новый адрес\n");
-                            scanner.nextLine();
-                            listStores.get(shop).address = scanner.nextLine();
-                            System.out.println("\nЗапись успешно обновлена\n");
-                            break;
-                        case 4:
-                            System.out.println("\nВведите новый тип магазина\n");
-                            scanner.nextLine();
-                            listStores.get(shop).typeOfStore = scanner.nextLine();
-                            System.out.println("\nЗапись успешно обновлена\n");
-                            break;
-                        case 5:
-                            type = numberOfProduct(listStores.get(shop).listOfProduct);
-                            if (type < 0 || listStores.get(shop).listOfProduct.size() <= type) {
-                                System.out.println("\nНеправильно выбран номер!!!\n");
-                                continue;
-                            }
-                            Product product = listStores.get(shop).listOfProduct.get(type);
-                            prd.printInfoForProd();
-                            flag = changeObjectField(product, scanner.nextInt());
-                            break;
-                        case 6:
-                            type = numberOfProduct(listStores.get(shop).listOfPromotionalProduct);
-                            if (type < 0 || listStores.get(shop).listOfPromotionalProduct.size() <= type) {
-                                System.out.println("\nНеправильно выбран номер!!!\n");
-                                continue;
-                            }
-                            PromotionalProduct promotionalProduct = listStores.get(shop).listOfPromotionalProduct.get(type);
-                            prd.printInfoForProd();
-                            flag = changeObjectField(promotionalProduct, scanner.nextInt());
-                            break;
-                        case 7:
-                            type = numberOfProduct(listStores.get(shop).listOfFreeProduct);
-                            if (type < 0 || listStores.get(shop).listOfFreeProduct.size() <= type) {
-                                System.out.println("\nНеправильно выбран номер!!!\n");
-                                continue;
-                            }
-                            FreeProduct freeProduct = listStores.get(shop).listOfFreeProduct.get(type);
-                            prd.printInfoForProd();
-                            flag = changeObjectField(freeProduct, scanner.nextInt());
-                    }
-                    if (flag) {
+                    if (selectAFieldOrListToEdit(type, shop)) {
                         isChanged = true;
                     }
                     break;
@@ -288,64 +109,7 @@ public class Main {
                     System.out.println("\nВыберите что требуется удалить:\n" +
                             "1 - магазин\n" +
                             "2 - товар\n");
-                    switch (scanner.nextInt()) {
-                        case 1:
-                            int shop2 = numberOfShop();
-                            if (shop2 < 0 || listStores.size() <= shop2) {
-                                System.out.println("\nНеправильно введён номер магазина!!!\n");
-                                continue;
-                            }
-                            listStores.remove(shop2);
-                            System.out.println("\nМагазин успешно удалён\n");
-                            isChanged = true;
-                            break;
-                        case 2:
-                            System.out.println("\nДля удаления товара");
-                            int shop3 = numberOfShop();
-                            if (shop3 < 0 || listStores.size() <= shop3) {
-                                System.out.println("\nНеправильно введён номер магазина!!!\n");
-                                continue;
-                            }
-                            int number;
-                            type = typeOfProduct();
-                            switch (type) {
-                                case 1:
-                                    number = numberOfProduct(listStores.get(shop3).listOfProduct);
-                                    if (number < 0 || listStores.get(shop3).listOfProduct.size() <= number) {
-                                        System.out.println("\nНеправильно выбран номер!!!\n");
-                                        continue;
-                                    }
-                                    listStores.get(shop3).listOfProduct.remove(number);
-                                    System.out.println("\nТовар успешно удалён\n");
-                                    isChanged = true;
-                                    break;
-                                case 2:
-                                    number = numberOfProduct(listStores.get(shop3).listOfPromotionalProduct);
-                                    if (number < 0 || listStores.get(shop3).listOfPromotionalProduct.size() <= number) {
-                                        System.out.println("\nНеправильно выбран номер!!!\n");
-                                        continue;
-                                    }
-                                    listStores.get(shop3).listOfPromotionalProduct.remove(number);
-                                    System.out.println("\nТовар успешно удалён\n");
-                                    isChanged = true;
-                                    break;
-                                case 3:
-                                    number = numberOfProduct(listStores.get(shop3).listOfFreeProduct);
-                                    if (number < 0 || listStores.get(shop3).listOfFreeProduct.size() <= number) {
-                                        System.out.println("\nНеправильно выбран номер!!!\n");
-                                        continue;
-                                    }
-                                    listStores.get(shop3).listOfFreeProduct.remove(number);
-                                    System.out.println("\nТовар успешно удалён\n");
-                                    isChanged = true;
-                                    break;
-                                default:
-                                    System.out.println("\nНеправильно выбран номер!!!\n");
-                            }
-                            break;
-                        default:
-                            System.out.println("\nНеправильно выбран номер!!!\n");
-                    }
+                    selectWhatYouWantToRemove(scanner.nextInt());
                     break;
                 case 6:
                     System.out.println("\nВведите строку для поиска:\n");
@@ -474,6 +238,263 @@ public class Main {
         }
     }
 
+    private static void selectDataToViewAndSort(int type) {
+        switch (type) {
+            case 1:
+                str.printInfoForSortShop();
+                str.sortStores(scanner.nextInt(), listStores);
+                prd.printInfoForProd();
+                type = scanner.nextInt();
+                for (Store store : listStores) {
+                    store.listOfProduct.sort(new ProductComparator<>(type));
+                    store.listOfPromotionalProduct.sort(new PromotionalProductComparator(type));
+                    store.listOfFreeProduct.sort(new FreeProductComparator(type));
+                }
+                str.showList(listStores);
+                break;
+            case 2:
+                str.printInfoForSortShop();
+                str.sortStores(scanner.nextInt(), listStores);
+                str.showStores(listStores);
+                break;
+            case 3:
+                int shop = numberOfShop();
+                type = typeOfProduct();
+                prd.printInfoForProd();
+                try {
+                    switch (type) {
+                        case 1:
+                            listStores.get(shop).listOfProduct.sort(new ProductComparator<>(scanner.nextInt()));
+                            listStores.get(shop).listOfProduct.forEach(Product::print);
+                            break;
+                        case 2:
+                            listStores.get(shop).listOfPromotionalProduct.sort(new PromotionalProductComparator(scanner.nextInt()));
+                            listStores.get(shop).listOfPromotionalProduct.forEach(PromotionalProduct::print);
+                            break;
+                        case 3:
+                            listStores.get(shop).listOfFreeProduct.sort(new FreeProductComparator(scanner.nextInt()));
+                            listStores.get(shop).listOfFreeProduct.forEach(FreeProduct::print);
+                            break;
+                        default:
+                            System.out.println("\nНеправильно введён номер типа товара!!!\n");
+                    }
+                } catch (IndexOutOfBoundsException e) {
+                    System.out.println("\nНеправильно введён номер магазина!!!\n");
+                }
+                break;
+            case 0:
+                break;
+            default:
+                System.out.println("\nНеправильно введён номер операции\n");
+        }
+    }
+
+    private static void chooseWhatToCreate(int type) {
+        switch (type) {
+            case 1:
+                Store store = new Store();
+                System.out.println("\nВведите id:\n");
+                scanner.nextLine();
+                store.id = scanner.nextLine();
+                System.out.println("\nВведите название:\n");
+                store.name = scanner.nextLine();
+                System.out.println("\nВведите адрес:\n");
+                store.address = scanner.nextLine();
+                System.out.println("\nВведите тип магазина:\n");
+                store.typeOfStore = scanner.nextLine();
+                listStores.add(store);
+                isChanged = true;
+                System.out.println("\nНовый магазин успешно создан\n");
+                break;
+            case 2:
+                int shop = numberOfShop();
+                if (shop < 0 || listStores.size() <= shop) {
+                    System.out.println("\nНеправильно введён номер магазина!!!\n");
+                    break;
+                }
+                type = typeOfProduct();
+                if (type < 0 || 3 < type) {
+                    System.out.println("\nНеправильно введён номер типа товара!!!\n");
+                    break;
+                }
+                System.out.println("\nВведите id нового товара:\n");
+                scanner.nextLine();
+                String id = scanner.nextLine();
+                System.out.println("\nВведите название:\n");
+                String name = scanner.nextLine();
+                System.out.println("\nВведите штрих-код:\n");
+                String barcode = scanner.nextLine();
+                System.out.println("\nВведите рейтинг:\n");
+                double rating = scanner.nextDouble();
+                System.out.println("\nВведите категорию:\n");
+                scanner.nextLine();
+                String category = scanner.nextLine();
+                System.out.println("\nВведите количество товара:\n");
+                int quantityInStock = scanner.nextInt();
+                System.out.println("\nВведите срок службы (например: Feb 7, 2019):\n");
+                scanner.nextLine();
+                String expirationDate = scanner.nextLine();
+                if (!validationCheck(expirationDate)) {
+                    System.out.println("\nНеправильно введина дата\n");
+                    break;
+                }
+                switch (type) {
+                    case 1:
+                        System.out.println("\nВведите цену:\n");
+                        double price = scanner.nextDouble();
+                        listStores.get(shop).listOfProduct.add(new Product(id, name, barcode, price, rating, category, quantityInStock, expirationDate));
+                        break;
+                    case 2:
+                        System.out.println("\nВведите цену:\n");
+                        double price2 = scanner.nextDouble();
+                        System.out.println("\nВведите срок действия акции (например: Feb 7, 2019):\n");
+                        scanner.nextLine();
+                        String validityPeriod = scanner.nextLine();
+                        if (validationCheck(validityPeriod)) {
+                            listStores.get(shop).listOfPromotionalProduct.add(new PromotionalProduct(id, name, barcode, price2, rating, category, quantityInStock, expirationDate, validityPeriod));
+                        } else {
+                            System.out.println("\nНеправильно введина дата\n");
+                            break;
+                        }
+                        break;
+                    case 3:
+                        System.out.println("\nВведите количество товара в одни руки:\n");
+                        int quantityInOneHand = scanner.nextInt();
+                        listStores.get(shop).listOfFreeProduct.add(new FreeProduct(id, name, barcode, rating, category, quantityInStock, expirationDate, quantityInOneHand));
+                }
+                isChanged = true;
+                System.out.println("\nНовый продукт успешно создан\n");
+                break;
+            default:
+                System.out.println("\nНеправильно выбран номер!!!\n");
+        }
+    }
+
+    private static boolean selectAFieldOrListToEdit(int type, int shop) {
+        boolean flag = false;
+        switch (type) {
+            case 1:
+                System.out.println("\nВведите новый id\n");
+                scanner.nextLine();
+                listStores.get(shop).id = scanner.nextLine();
+                System.out.println("\nЗапись успешно обновлена\n");
+                flag = true;
+                break;
+            case 2:
+                System.out.println("\nВведите новое название\n");
+                scanner.nextLine();
+                listStores.get(shop).name = scanner.nextLine();
+                System.out.println("\nЗапись успешно обновлена\n");
+                flag = true;
+                break;
+            case 3:
+                System.out.println("\nВведите новый адрес\n");
+                scanner.nextLine();
+                listStores.get(shop).address = scanner.nextLine();
+                System.out.println("\nЗапись успешно обновлена\n");
+                flag = true;
+                break;
+            case 4:
+                System.out.println("\nВведите новый тип магазина\n");
+                scanner.nextLine();
+                listStores.get(shop).typeOfStore = scanner.nextLine();
+                System.out.println("\nЗапись успешно обновлена\n");
+                flag = true;
+                break;
+            case 5:
+                type = numberOfProduct(listStores.get(shop).listOfProduct);
+                if (type < 0 || listStores.get(shop).listOfProduct.size() <= type) {
+                    System.out.println("\nНеправильно выбран номер!!!\n");
+                    break;
+                }
+                Product product = listStores.get(shop).listOfProduct.get(type);
+                prd.printInfoForProd();
+                flag = changeObjectField(product, scanner.nextInt());
+                break;
+            case 6:
+                type = numberOfProduct(listStores.get(shop).listOfPromotionalProduct);
+                if (type < 0 || listStores.get(shop).listOfPromotionalProduct.size() <= type) {
+                    System.out.println("\nНеправильно выбран номер!!!\n");
+                    break;
+                }
+                PromotionalProduct promotionalProduct = listStores.get(shop).listOfPromotionalProduct.get(type);
+                prd.printInfoForProd();
+                flag = changeObjectField(promotionalProduct, scanner.nextInt());
+                break;
+            case 7:
+                type = numberOfProduct(listStores.get(shop).listOfFreeProduct);
+                if (type < 0 || listStores.get(shop).listOfFreeProduct.size() <= type) {
+                    System.out.println("\nНеправильно выбран номер!!!\n");
+                    break;
+                }
+                FreeProduct freeProduct = listStores.get(shop).listOfFreeProduct.get(type);
+                prd.printInfoForProd();
+                flag = changeObjectField(freeProduct, scanner.nextInt());
+        }
+        return flag;
+    }
+
+    private static void selectWhatYouWantToRemove(int type) {
+        switch (type) {
+            case 1:
+                int shop2 = numberOfShop();
+                if (shop2 < 0 || listStores.size() <= shop2) {
+                    System.out.println("\nНеправильно введён номер магазина!!!\n");
+                    break;
+                }
+                listStores.remove(shop2);
+                System.out.println("\nМагазин успешно удалён\n");
+                isChanged = true;
+                break;
+            case 2:
+                System.out.println("\nДля удаления товара");
+                int shop3 = numberOfShop();
+                if (shop3 < 0 || listStores.size() <= shop3) {
+                    System.out.println("\nНеправильно введён номер магазина!!!\n");
+                    break;
+                }
+                int number;
+                type = typeOfProduct();
+                switch (type) {
+                    case 1:
+                        number = numberOfProduct(listStores.get(shop3).listOfProduct);
+                        if (number < 0 || listStores.get(shop3).listOfProduct.size() <= number) {
+                            System.out.println("\nНеправильно выбран номер!!!\n");
+                            break;
+                        }
+                        listStores.get(shop3).listOfProduct.remove(number);
+                        System.out.println("\nТовар успешно удалён\n");
+                        isChanged = true;
+                        break;
+                    case 2:
+                        number = numberOfProduct(listStores.get(shop3).listOfPromotionalProduct);
+                        if (number < 0 || listStores.get(shop3).listOfPromotionalProduct.size() <= number) {
+                            System.out.println("\nНеправильно выбран номер!!!\n");
+                            break;
+                        }
+                        listStores.get(shop3).listOfPromotionalProduct.remove(number);
+                        System.out.println("\nТовар успешно удалён\n");
+                        isChanged = true;
+                        break;
+                    case 3:
+                        number = numberOfProduct(listStores.get(shop3).listOfFreeProduct);
+                        if (number < 0 || listStores.get(shop3).listOfFreeProduct.size() <= number) {
+                            System.out.println("\nНеправильно выбран номер!!!\n");
+                            break;
+                        }
+                        listStores.get(shop3).listOfFreeProduct.remove(number);
+                        System.out.println("\nТовар успешно удалён\n");
+                        isChanged = true;
+                        break;
+                    default:
+                        System.out.println("\nНеправильно выбран номер!!!\n");
+                }
+                break;
+            default:
+                System.out.println("\nНеправильно выбран номер!!!\n");
+        }
+    }
+
     private static void createList(ArrayList<Store> listFromHDD, ArrayList<Store> listFromServer) {
         listStores = new ArrayList<>(listFromHDD);
         int number;
@@ -497,6 +518,7 @@ public class Main {
                             store.address = storeFromServer.address;
                             store.typeOfStore = storeFromServer.typeOfStore;
                             System.out.println("Установленны данные с сервера.");
+                            isChanged = true;
                         }
                         if (number == 1) {
                             System.out.println("Установлены данные с диска.");
@@ -515,6 +537,7 @@ public class Main {
             }
             if (!isThere) {
                 listStores.add(storeFromServer);
+                isChanged = true;
             }
         }
         System.out.println("\nСоздание списка магазинов завершенно.\n");
@@ -534,6 +557,7 @@ public class Main {
             thisList.clear();
             thisList.addAll(thatList);
             System.out.println("Установленны данные с сервера.");
+            isChanged = true;
         }
         if (number == 1) {
             System.out.println("Установлены данные с диска.");

@@ -18,28 +18,14 @@ public class ClassForHTML implements Comparable {
     @Override
     public int compareTo(Object o) {
         ClassForHTML that = (ClassForHTML) o;
-        if (this.shopName.compareTo(that.shopName) > 0) {
-            return 1;
-        } else if (this.shopName.compareTo(that.shopName) < 0) {
-            return -1;
-        } else {
-            if (this.typeOfShop.compareTo(that.typeOfShop) > 0) {
-                return 1;
-            } else if (this.typeOfShop.compareTo(that.typeOfShop) < 0) {
-                return -1;
-            } else {
-                if (this.categoryOfProduct.compareTo(that.categoryOfProduct) > 0) {
-                    return 1;
-                } else if (this.categoryOfProduct.compareTo(that.categoryOfProduct) < 0) {
-                    return -1;
-                } else {
-                    if (this.ratingOfProduct.compareTo(that.ratingOfProduct) > 0) {
-                        return 1;
-                    } else if (this.ratingOfProduct.compareTo(that.ratingOfProduct) < 0) {
-                        return -1;
-                    } else return this.productName.compareTo(that.productName);
-                }
-            }
-        }
+        if (!this.shopName.equals(that.shopName)) {
+            return this.shopName.compareTo(that.shopName);
+        } else if (!this.typeOfShop.equals(that.typeOfShop)) {
+            return this.typeOfShop.compareTo(that.typeOfShop);
+        } else if (!this.categoryOfProduct.equals(that.categoryOfProduct)) {
+            return this.categoryOfProduct.compareTo(that.categoryOfProduct);
+        } else if (!this.ratingOfProduct.equals(that.ratingOfProduct)) {
+            return this.ratingOfProduct.compareTo(that.ratingOfProduct);
+        } else return this.productName.compareTo(that.productName);
     }
 }
