@@ -21,7 +21,7 @@ public class ThreadFromHDD extends Thread {
     @Override
     public void run() {
         StringBuilder builder = new StringBuilder();
-        try (FileReader reader = new FileReader("test.txt")) {
+        try (FileReader reader = new FileReader("list.txt")) {
             int i;
             while ((i = reader.read()) != -1) {
                 builder.append((char) i);

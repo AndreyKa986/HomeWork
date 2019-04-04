@@ -26,7 +26,6 @@ public class Main {
     private static boolean isChanged = false;
 
     public static void main(String[] args) throws InterruptedException, IOException {
-        FileWriter writer = new FileWriter("text.txt");
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         ArrayList<Store> listFromHDD = new ArrayList<>();
         ArrayList<Store> listFromServer = new ArrayList<>();
@@ -165,8 +164,12 @@ public class Main {
                     }
                     break;
                 case 7:
+                    FileWriter writer = new FileWriter("text.txt");
+//                    FileWriter writer = new FileWriter("list.txt");
+//                    для перезаписи исходного файла
                     writer.write(gson.toJson(listStores));
                     writer.flush();
+                    writer.close();
                     System.out.println("\nФайл успешно сохранён\n");
                     isChanged = false;
                     break;
@@ -219,8 +222,12 @@ public class Main {
                                 "Желаете сохранить?\n1 - да\n2 - нет\n");
                         int choice = scanner.nextInt();
                         if (choice == 1) {
-                            writer.write(gson.toJson(listStores));
-                            writer.flush();
+                            FileWriter writer2 = new FileWriter("text.txt");
+//                    FileWriter writer2 = new FileWriter("list.txt");
+//                    для перезаписи исходного файла
+                            writer2.write(gson.toJson(listStores));
+                            writer2.flush();
+                            writer2.close();
                         }
                         if (choice != 1 && choice != 2) {
                             System.out.println("\nНеправильный ввод!!!\n");
@@ -229,7 +236,6 @@ public class Main {
                         }
                     }
                     scanner.close();
-                    writer.close();
                     break;
                 default:
                     System.out.println("\nНеправильно введён номер операции.\n");
@@ -710,7 +716,7 @@ public class Main {
         System.out.println();
     }
 
-    private static boolean validationCheck(String string) {
+    protected static boolean validationCheck(String string) {
         Pattern pattern = Pattern.compile("^((Jan)|(Feb)|(Mar)|(Apr)|(May)|(Jun)|(Jul)|(Aug)|(Sep)|(Oct)|(Nov)|(Dec))\\s[1,2]?\\d(, )(\\d){4}$");
         Matcher matcher = pattern.matcher(string);
         return matcher.matches();

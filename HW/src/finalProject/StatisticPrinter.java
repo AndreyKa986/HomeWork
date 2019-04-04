@@ -12,7 +12,7 @@ import java.util.Map;
 public class StatisticPrinter {
     private static StatisticPrinter instance;
 
-    private StatisticPrinter() {
+    StatisticPrinter() {
     }
 
     public static StatisticPrinter getInstance() {
@@ -219,7 +219,7 @@ public class StatisticPrinter {
         System.out.println("Количество товаров во всех магазинах - " + quantity);
     }
 
-    private int quantityAllProduct(Store store) {
+    protected int quantityAllProduct(Store store) {
         int quantity = 0;
         if (!store.listOfProduct.isEmpty()) {
             for (Product product : store.listOfProduct) {
